@@ -1,8 +1,14 @@
 import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Landing from './pages/Landing'
 
 function App() {
   return (
-    <div className='text-3xl text-red-500'>App</div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Landing/>}></Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

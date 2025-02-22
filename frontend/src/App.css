@@ -1,0 +1,41 @@
+.landing-background {
+    height: 100%;
+    width: 100%;
+}
+
+@media (min-width: 1536px){
+    .landing-background{
+        clip-path: polygon(180% 0%, 0% 68%, 0% 0%);
+    }
+}
+
+@media (max-width: 1536px){
+    .landing-background{
+        clip-path: polygon(180% 0%, 0% 68%, 0% 0%);
+    }
+}
+
+@media (max-width: 1280px){
+    .landing-background{
+        clip-path: polygon(200% 0%, 0% 65%, 0% 0%);
+    }
+}
+
+@media (max-width: 1024px){
+    .landing-background{
+        clip-path: polygon(220% 0%, 0% 62%, 0% 0%);
+    }
+}
+
+
+@media (max-width: 768px){
+    .landing-background{
+        clip-path: polygon(250% 0%, 0% 59%, 0% 0%);
+    }
+}
+
+@media (max-width: 640px){
+    .landing-background{
+        clip-path: polygon(350% 0%, 0% 58%, 0% 0%);
+    }
+}
