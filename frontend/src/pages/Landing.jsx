@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BackgroundGradientAnimationDemo } from '../components/Landing/BackgroundGradientAnimationDemo'
 import '../App.css'
 import Navbar from '../components/Landing/Navbar'
@@ -8,7 +8,7 @@ function Landing() {
   return (
     <div className='h-screen w-full relative overflow-hidden'>
         <div className='landing-background'><BackgroundGradientAnimationDemo/></div>
-        <Navbar/>
+        <Navbar button={true}/>
         <Skeleton/>
     </div>
   )
