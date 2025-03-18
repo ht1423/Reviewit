@@ -1,0 +1,20 @@
+import express from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import connectDB from './db.js'
+import cookieParser from 'cookie-parser'
+dotenv.config()
+const app = express()
+
+connectDB()
+
+app.use(express.json())
+app.use(cors({
+    origin: 'http://localhost:5173',
+    cresentials: true
+}))
+app.use(cookieParser())
+
+const PORT = process.env.PORT || 3001
+
+app.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`))
