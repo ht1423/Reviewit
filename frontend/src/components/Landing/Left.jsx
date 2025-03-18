@@ -5,8 +5,8 @@ function Left() {
     const navigate = useNavigate()
 
   return (
-    <div className='w-[26em] md:w-[28em] lg:w-[30em] xl:w-[31em] '>
-        <h6 className='text-[56px] md:text-[60px] lg:text-[64px] xl:text-[66px]  font-semibold' style={{
+    <div className='w-[26em] md:w-[28em] lg:w-[30em] '>
+        <h6 className='text-[56px] md:text-[60px] lg:text-[64px] text-black/80 font-semibold' style={{
           lineHeight: '1.27',
           letterSpacing: '-1px'
         }}> Effortless testimonials to build trust & grow your brand</h6>

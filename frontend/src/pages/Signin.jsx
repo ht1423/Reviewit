@@ -1,18 +1,19 @@
 import React from 'react'
 import { BackgroundGradientAnimationDemo } from '../components/Landing/BackgroundGradientAnimationDemo'
-import '../App.css'
 import Navbar from '../components/Landing/Navbar'
-import Hero from '../components/Landing/Hero'
-function Landing() {
+import Card from '../components/Signup/Card'
+import '../App.css'
+
+function Signin() {
   return (
-    <div className='h-screen w-full relative overflow-hidden'>
-        <div className='landing-background'>
+    <div className='h-screen w-full relative'>
+        <div className='signin-background'>
             <BackgroundGradientAnimationDemo/>
         </div>
-        <Navbar button={true}/>
-        <Hero/>
+        <Navbar />
+        <Card login={true}/>
     </div>
   )
 }
 
-export default Landing
+export default Signin

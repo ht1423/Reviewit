@@ -4,13 +4,14 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { IoMdMenu } from "react-icons/io";
 import DropDownMenu from './DropDownMenu';
+import useAuthStore from '../../store/authStore';
 
-function Navbar({signin}) {
+function Navbar({button,black}) {
 
     const [visible, setvisible] = useState(false)
     const navigate = useNavigate()
     const ref = useRef(null)
-
+    const { isAuthenticated } = useAuthStore()
 
     const handleClick = () => {
         setvisible(!visible)
@@ -30,18 +31,20 @@ function Navbar({signin}) {
     },[visible])
 
   return (
-    <div className='absolute top-4 flex justify-between items-center right-0 left-0 px-10 md:px-12 lg:px-24 xl:px-32 2xl:px-48'>
+    <div className='absolute top-0 flex justify-between right-0 left-0 px-10 md:px-12 lg:px-24 xl:px-32 2xl:px-48 pt-4'>
 
-        <Link to='/' className='text-white text-[21px] font-[800] handlee-regular'>Reviewit</Link>
+        <Link to='/' className={`${black? 'text-black' : 'text-white'} text-[21px] font-[800] handlee-regular `}>Reviewit</Link>
 
-        {!signin && <button onClick={() => navigate('/signin')} className='font-mono text-white border-2 rounded-full pl-6 pr-4 py-[5px] flex items-center hover:text-black hover:border-black transform transition-all duration-300 ease-in-out'>Get Started <MdOutlineKeyboardArrowRight className='ml-2 text-xl'/>
-        </button>}
+        {button && 
+            ( !isAuthenticated? <button onClick={() => navigate('/signin')} className='font-mono text-white border-2 rounded-full pl-6 pr-4 py-[5px] flex items-center hover:text-black hover:border-black transform transition-all duration-300 ease-in-out'>Get Started <MdOutlineKeyboardArrowRight className='ml-2 text-xl'/>
+            </button>
 
-        {signin && <div ref={ref} onClick={handleClick} className='text-white text-xl cursor-pointer bg-white/20 px-4 py-1 rounded-full relative '><IoMdMenu />
+            : <div ref={ref} onClick={handleClick} className='text-white text-xl cursor-pointer bg-white/20 px-4 py-1 rounded-full relative '><IoMdMenu />
 
-            {visible && <DropDownMenu/>} 
-               
-        </div>}
+                {visible && <DropDownMenu/>} 
+                
+            </div>)
+        }
 
     </div>
   )
