@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
-import { IoMdMenu } from "react-icons/io";
 import DropDownMenu from './DropDownMenu';
 import useAuthStore from '../../store/authStore';
 
@@ -12,6 +11,7 @@ function Navbar({button,black}) {
     const navigate = useNavigate()
     const ref = useRef(null)
     const { isAuthenticated } = useAuthStore()
+    const{ user } = useAuthStore()
 
     const handleClick = () => {
         setvisible(!visible)
@@ -30,16 +30,19 @@ function Navbar({button,black}) {
         }
     },[visible])
 
+    console.log(user?.name)
+
   return (
-    <div className='absolute top-0 flex justify-between right-0 left-0 px-10 md:px-12 lg:px-24 xl:px-32 2xl:px-48 pt-4'>
+    <div className='absolute top-0 flex justify-between right-0 left-0 px-10 md:px-12 lg:px-24 xl:px-40 2xl:px-56 pt-4 z-10 items-center'>
 
         <Link to='/' className={`${black? 'text-black' : 'text-white'} text-[21px] font-[800] handlee-regular `}>Reviewit</Link>
 
         {button && 
-            ( !isAuthenticated? <button onClick={() => navigate('/signin')} className='font-mono text-white border-2 rounded-full pl-6 pr-4 py-[5px] flex items-center hover:text-black hover:border-black transform transition-all duration-300 ease-in-out'>Get Started <MdOutlineKeyboardArrowRight className='ml-2 text-xl'/>
+            ( !isAuthenticated? <button onClick={() => navigate('/signin')} className={`font-mono  border-2 rounded-full pl-6 pr-4 py-[5px]  ${black? 'border-black text-black hover:bg-black hover:text-white' : 'text-white border-white hover:text-black hover:border-black'} flex items-center  transform transition-all duration-300 ease-in-out`}>Get Started <MdOutlineKeyboardArrowRight className='ml-2 text-xl'/>
             </button>
 
-            : <div ref={ref} onClick={handleClick} className='text-white text-xl cursor-pointer bg-white/20 px-4 py-1 rounded-full relative '><IoMdMenu />
+            : <div ref={ref} onClick={handleClick} className=' relative'>
+                <h4 className={`flex items-center justify-center ${black? 'bg-[rgb(177,173,255)]' : ' bg-white/20 '} text-xl text-white cursor-pointer rounded-full h-10 w-10 uppercase pb-[2px]`}>{user?.name[0]}</h4>
 
                 {visible && <DropDownMenu/>} 
                 

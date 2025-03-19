@@ -12,7 +12,7 @@ const useAuthStore = create((set) => ({
                 withCredentials: true
             })
 
-            set({ isAuthenticated: res.data.isAuthenticated, isLoading: false})
+            set({ isAuthenticated: res.data.isAuthenticated, isLoading: false, user: res.data.user})
         }
 
         catch (e){
@@ -27,11 +27,12 @@ const useAuthStore = create((set) => ({
             await axios.post('http://localhost:3001/api/user/signup', { name, email, password }, {
                 withCredentials: true
             });
-            set({ isAuthenticated: true });
+            await useAuthStore.getState().fetchUser();
+            set({ isAuthenticated: true, isLoading: false});
             toast.success('Boom! You’re officially in the club. 🎊');
             navigate('/dashboard');
         } catch (error) {
-            handleAuthError(error);
+            handleAuthError(error,navigate);
         }
     },
 
@@ -40,11 +41,43 @@ const useAuthStore = create((set) => ({
             await axios.post('http://localhost:3001/api/user/signin', { email, password }, {
                 withCredentials: true
             });
-            set({ isAuthenticated: true });
+            await useAuthStore.getState().fetchUser();
+            set({ isAuthenticated: true, isLoading: false});
             toast.success('Welcome back! We missed you... kinda. 😜');
             navigate('/dashboard');
         } catch (error) {
-            handleAuthError(error);
+            handleAuthError(error,navigate);
+        }
+    },
+
+    create: async (name, description, navigate) => {
+        try {
+            const response = await axios.post('http://localhost:3001/api/workspace/create', { name, description },{
+                withCredentials: true
+            })
+            toast.success('Workspace created successfully 🥳')
+            navigate(`/get/${response.data.workspaceId}`)
+        }
+        catch (error){
+            handleAuthError(error,navigate)
+        }
+    },
+
+    get: async (workspaceId, navigate) => {
+        try {
+            if(!workspaceId){
+                throw new Error("Workspace ID is missing ☹️")
+            }
+            
+            const response = await axios.get(`http://localhost:3001/api/workspace/get/${workspaceId}`,{
+                withCredentials: true
+            })
+
+            set({ workspace: response.data })
+            navigate(`/get/${workspaceId}`)
+        }
+        catch (error){
+            handleAuthError(error,navigate)
         }
     },
 
@@ -54,17 +87,41 @@ const useAuthStore = create((set) => ({
             set({ isAuthenticated: false })
         }
         catch (error){
-            console.error('Logout failed',error)
+            handleAuthError(error,navigate)
         }
     }
 })
 )
 
-const handleAuthError = (error) => {
-    if (error.response?.status === 400 && error.response?.data?.errors) {
+const handleAuthError = (error, navigate) => {
+    if (error.response?.status === 401){
+        if(error.response?.data?.msg === 'Unauthorized'){
+            toast.error('Oops! Access denied. Please log in to continue. 🚀');
+        }
+        else if(error.response?.data?.msg === 'Invalid password'){
+            toast.error('Oops! Invalid password. Please try again. 😅');
+        }
+        else {
+            toast.error('Authentication failed! Please check your credentials. 🤔');
+        }
+    }
+    else if (error.response?.status === 409){
+        setTimeout(() => {
+            navigate('/signin')
+        },1000) 
+        toast.error('Looks like someone’s been here before 👀. Please log in to continue!');
+    }
+    else if (error.response?.status === 404){ 
+        toast.error('User not found! 🚀 Looks like you’re new here—sign up and get started!');
+    }
+    else if (error.response?.status === 400  && error.response?.data?.errors) {
         error.response.data.errors.forEach((err) => toast.error(err.message));
-    } else {
-        toast.error(error.response?.data?.message || error.message);
+    }
+    else if (error.response?.status === 500) {
+        toast.error('Oops! Something went wrong. Please try again. 😅');
+    }
+     else {
+        toast.error(error.response?.data?.msg || error.msg);
     }
 };
 

@@ -1,6 +1,11 @@
 import mongoose from 'mongoose'
 
-const UserSchema = new mongoose.Schema({
+const WorkspaceSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     name: {
         type: String,
         required: true,
@@ -8,30 +13,20 @@ const UserSchema = new mongoose.Schema({
         maxLength: 100,
         trim: true
     },
-    email: {
+    description: {
         type: String,
         required: true,
-        unique: true,
+        minLength: 1,
+        maxLength: 1000,
         trim: true
     },
-    password: {
-        type: String,
-        required: true,
-        minLength: 8,
-        maxLength: 128
-    },
-    workspaces: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Workspace',
-        required: true
-    }],
     testimonials: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Testimonial',
         required: true
-    }]
+    }],
 },{
     timestamps: true
 })
 
-export default mongoose.model('User', UserSchema)
+export default mongoose.model('Workspace',WorkspaceSchema)

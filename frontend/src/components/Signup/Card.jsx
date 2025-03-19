@@ -22,11 +22,11 @@ function Card({login}) {
   
 
   return (
-    <div className='absolute top-1/2 left-1/2 mt-4 transform -translate-x-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-md shadow-[0_0_20px_rgba(10,10,10,0.1)] rounded-lg px-10 lg:px-12 py-14 w-[27em] md:w-[28em] lg:w-[30em]'>
+    <div className='absolute top-1/2 left-1/2 mt-4 transform -translate-x-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-md shadow-[0_0_20px_rgba(10,10,10,0.1)] rounded-lg px-10 lg:px-12 py-14 w-[27em] md:w-[28em] lg:w-[30em] lg:right-10'>
 
       <form onSubmit={handleAuth} className='flex flex-col'>
 
-        <h6 className='text-[28px] text-[rgb(46,49,59)] tracking-tight whitespace-nowrap font-semibold text-left mb-10'>{login? 'Sign in to your account' : 'Create your Reviewit account'}</h6>
+        <h1 className='text-[28px] text-[rgb(46,49,59)] tracking-tight whitespace-nowrap font-semibold text-left mb-10'>{login? 'Sign in to your account' : 'Create your Reviewit account'}</h1>
 
         <div>
           {!login && <InputBox text='Name' type='text' onChange={(e) => setName(e.target.value)}/>}

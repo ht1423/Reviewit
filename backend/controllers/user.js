@@ -37,7 +37,8 @@ const signup = async (req,res) => {
 
         const payload = {
             user: {
-                userId: newUser._id
+                userId: newUser._id,
+                name: newUser.name
             }
         }
 
@@ -47,9 +48,11 @@ const signup = async (req,res) => {
             httpOnly: true
         })
 
+        const user = await User.findById(newUser._id).select('-password')
+
         return res.status(201).json({
             msg: 'Signup successful',
-            newUser
+            user
         })
     }
     catch (e){
@@ -92,7 +95,8 @@ const signin = async (req,res) => {
 
         const payload = {
             user: {
-                userId: existingUser._id
+                userId: existingUser._id,
+                name: existingUser.name
             }
         }
 
@@ -102,9 +106,11 @@ const signin = async (req,res) => {
             httpOnly: true
         })
 
+        const user = await User.findById(existingUser._id).select('-password')
+
         return res.json({
             msg: 'Signin successful',
-            existingUser
+            user
         })
     }
     catch (e){
@@ -152,7 +158,8 @@ const me = (req,res) => {
         }
         
         return res.json({
-            isAuthenticated: true
+            isAuthenticated: true,
+            user: decoded.user
         })
     }
     catch (e){

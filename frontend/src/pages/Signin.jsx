@@ -6,7 +6,7 @@ import '../App.css'
 
 function Signin() {
   return (
-    <div className='h-screen w-full relative'>
+    <div className='h-screen w-full relative overflow-hidden'>
         <div className='signin-background'>
             <BackgroundGradientAnimationDemo/>
         </div>
