@@ -5,6 +5,7 @@ import connectDB from './db.js'
 import cookieParser from 'cookie-parser'
 import authRoutes from './routes/user.js'
 import workspaceRoutes from './routes/workspace.js'
+import testimonialRoutes from './routes/testimonials.js'
 dotenv.config()
 const app = express()
 
@@ -17,8 +18,10 @@ app.use(cors({
 }))
 app.use(cookieParser())
 
+
 app.use('/api/user', authRoutes)
 app.use('/api/workspace', workspaceRoutes)
+app.use('/api/testimonial', testimonialRoutes)
 
 const PORT = process.env.PORT || 3001
 

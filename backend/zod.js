@@ -28,7 +28,10 @@ const signupSchema = signinSchema
       .string()
       .min(1, '📝 A description is needed! Tell us what this workspace is about.')
       .max(1000, '📏 That’s a bit too long! Try keeping it under 1000 characters.')
-  });
+  }).strict();
   
+  const testimonialSchema = z.object({
+    text: z.string().max(1000, '📏 That’s a bit too long! Try keeping it under 1000 characters.').optional(),
+  }).strict()
 
-export { signinSchema, signupSchema, workspaceSchema };
+export { signinSchema, signupSchema, workspaceSchema, testimonialSchema };

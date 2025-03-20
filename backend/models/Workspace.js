@@ -24,7 +24,7 @@ const WorkspaceSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Testimonial',
         required: true
-    }],
+    }]
 },{
     timestamps: true
 })
