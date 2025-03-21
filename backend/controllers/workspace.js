@@ -1,6 +1,6 @@
 import User from "../models/User.js"
 import Workspace from "../models/Workspace.js"
-import { workspaceSchema } from "../zod.js"
+import workspaceSchema from "../zod/workspaceSchema.js"
 
 const createWorkspace = async (req,res) => {
     const { name, description } = req.body
@@ -15,7 +15,7 @@ const createWorkspace = async (req,res) => {
                     message: err.message
                 }))
             })
-        }
+        }       
 
         const workspace = await Workspace.create({
             userId,
@@ -34,7 +34,7 @@ const createWorkspace = async (req,res) => {
 
         return res.status(201).json({
             msg: 'Workspace created successfully',
-            workspaceId
+            workspace
         })
     }
     catch (e){

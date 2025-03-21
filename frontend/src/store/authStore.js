@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 const useAuthStore = create((set) => ({
     isAuthenticated: null,
     isLoading: true,
+    route: 'http://localhost:3001/api',
 
     fetchUser: async () => {
         try {
@@ -24,7 +25,7 @@ const useAuthStore = create((set) => ({
 
     signup: async (name, email, password, navigate) => {
         try {
-            await axios.post('http://localhost:3001/api/user/signup', { name, email, password }, {
+            await axios.post(`${route}/user/signup`, { name, email, password }, {
                 withCredentials: true
             });
             await useAuthStore.getState().fetchUser();
@@ -38,7 +39,7 @@ const useAuthStore = create((set) => ({
 
     signin: async (email, password, navigate) => {
         try {
-            await axios.post('http://localhost:3001/api/user/signin', { email, password }, {
+            await axios.post(`${route}/user/signin`, { email, password }, {
                 withCredentials: true
             });
             await useAuthStore.getState().fetchUser();
@@ -50,13 +51,23 @@ const useAuthStore = create((set) => ({
         }
     },
 
+    logout: async () => {
+        try {
+            await axios.post(`${route}/user/logout`, {}, { withCredentials: true })
+            set({ isAuthenticated: false })
+        }
+        catch (error){
+            handleAuthError(error,navigate)
+        }
+    },
+
     create: async (name, description, navigate) => {
         try {
-            const response = await axios.post('http://localhost:3001/api/workspace/create', { name, description },{
+            const response = await axios.post(`${route}/workspace/create`, { name, description },{
                 withCredentials: true
             })
             toast.success('Workspace created successfully 🥳')
-            navigate(`/get/${response.data.workspaceId}`)
+            navigate(`/get/${response.data.workspace.workspaceId}`)
         }
         catch (error){
             handleAuthError(error,navigate)
@@ -69,7 +80,7 @@ const useAuthStore = create((set) => ({
                 throw new Error("Workspace ID is missing ☹️")
             }
             
-            const response = await axios.get(`http://localhost:3001/api/workspace/get/${workspaceId}`,{
+            const response = await axios.get(`${route}/workspace/get/${workspaceId}`,{
                 withCredentials: true
             })
 
@@ -81,19 +92,37 @@ const useAuthStore = create((set) => ({
         }
     },
 
-    logout: async () => {
+    addTestimonial: async (requestBody,navigate, workspaceId, formType) => {
+
         try {
-            await axios.post('http://localhost:3001/api/user/logout', {}, { withCredentials: true })
-            set({ isAuthenticated: false })
+            const response = await axios.post(`${route}/testimonial/${workspaceId}/create?type=${formType}`, requestBody, {
+                withCredentials: true,
+            })
+
+            toast.success('Testimonial added successfully 🎉')
+            navigate(`/get/${workspaceId}`)
+
+        }
+        catch (e) {
+            handleAuthError(e)
+        }
+    },
+
+    getTestimonials: async (workspaceId,type) => {
+        try {
+            const response = await axios.get(`${route}/testimonial/${workspaceId}/get?${type}`)
+
+            set({ testimonials: response.data.testimonials })
         }
         catch (error){
-            handleAuthError(error,navigate)
+            handleAuthError(error)
         }
     }
+    
 })
 )
 
-const handleAuthError = (error, navigate) => {
+export const handleAuthError = (error, navigate) => {
     if (error.response?.status === 401){
         if(error.response?.data?.msg === 'Unauthorized'){
             toast.error('Oops! Access denied. Please log in to continue. 🚀');

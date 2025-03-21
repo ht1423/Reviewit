@@ -4,6 +4,7 @@ import useAuthStore from '../../store/authStore'
 function Heading() {
 
   const { workspace } = useAuthStore()
+  console.log("workspace", workspace)
 
   return (
     <div className='text-center text-4xl whitespace-nowrap font-medium flex items-center justify-center gap-6 mb-12'>

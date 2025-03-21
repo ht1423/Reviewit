@@ -25,13 +25,16 @@ const authMiddleware = (req,res,next) => {
         next()
     }
 
-    catch (e){
+    catch (e) {
         console.error('Error in authMiddleware', e)
-
-        return res.status(500).json({
-            msg: 'Internal server error'
-        })
+    
+        if (e.name === 'JsonWebTokenError' || e.name === 'TokenExpiredError') {
+            return res.status(401).json({ msg: 'Unauthorized' });
+        }
+    
+        return res.status(500).json({ msg: 'Internal server error' });
     }
+    
 }
 
 export default authMiddleware

@@ -11,7 +11,7 @@ function Left() {
           letterSpacing: '-1px'
         }}> Effortless testimonials to build trust & grow your brand</h1>
         <p className='mt-12 text-[19px] text-gray-800 tracking-tight lg:text-[20px]'>Join thousands of businesses using ReviewIt to effortlessly collect, beautifully showcase, and seamlessly embed authentic testimonials—boost trust, engage customers, and drive more sales.</p>
-        <button onClick={() => navigate('/create')} className='mt-12 text-[18px] font-mono text-white bg-gray-900 rounded-full px-10 tracking-tight py-[8px] hover:opacity-70 transform transition ease-in-out duration-300'>Create Workspace</button>
+        <button onClick={() => navigate('/create')} className='mt-12 text-[18px] font-mono text-white bg-gray-900 rounded-full px-10 tracking-tight py-[8px] hover:opacity-70 transform transition ease-in-out duration-300' aria-label='Create a new workspace'>Create Workspace</button>
     </div>
   )
 }

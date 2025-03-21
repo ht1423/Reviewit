@@ -34,7 +34,7 @@ function Card({login}) {
           <InputBox text='Password' type='password' onChange={(e) => setPassword(e.target.value)}/>
         </div>
 
-        <button type='submit' className='bg-[rgb(170,165,255)] font-medium mt-8 mb-4 text-white h-12 rounded-lg hover:opacity-70'>{login? 'Sign in' : 'Create account'}</button>
+        <button type='submit' className='bg-[rgb(170,165,255)] font-medium mt-8 mb-4 text-white h-12 rounded-lg hover:opacity-70 transition-opacity duration-300 ease-in-out'>{login? 'Sign in' : 'Create account'}</button>
 
         <p className='text-center text-[15px] font-medium text-[rgb(46,49,59)]'>{login? 'New to Reviewit? ' : 'Already have an account? '}<span onClick={() => {login? navigate('/signup') : navigate('/signin')}} className='text-blue-500 text-[14px] hover:underline tranform transition ease-in-out duration-300 cursor-pointer'>{login? 'Sign up' : 'Sign in'}</span></p>
 

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import DropDownMenu from './DropDownMenu';
 import useAuthStore from '../../store/authStore';
 
+
 function Navbar({button,black}) {
 
     const [visible, setvisible] = useState(false)
@@ -14,7 +15,7 @@ function Navbar({button,black}) {
     const{ user } = useAuthStore()
 
     const handleClick = () => {
-        setvisible(!visible)
+        setvisible(prevState => !prevState)
     }
 
     useEffect(() => {
@@ -30,7 +31,6 @@ function Navbar({button,black}) {
         }
     },[visible])
 
-    console.log(user?.name)
 
   return (
     <div className='absolute top-0 flex justify-between right-0 left-0 px-10 md:px-12 lg:px-24 xl:px-40 2xl:px-56 pt-4 z-10 items-center'>

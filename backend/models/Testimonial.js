@@ -4,18 +4,28 @@ const TestimonialSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
     },
     workspaceId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Workspace',
-        required: true
     },
     type: {
         type: String,
         enum: ['text','image','video'],
         default: 'text',
         required: true
+    },
+    name: {
+        type: String,
+        maxLength: 100,
+        trim: true,
+        required: true
+    },
+    rating: {
+        type: Number,
+        min: 0,
+        max: 5,
+        default: 0,
     },
     text: {
         type: String,
@@ -24,7 +34,7 @@ const TestimonialSchema = new mongoose.Schema({
     mediaUrl: {
         type: String,
     },
-    WallOfLove: {
+    wallOfLove: {
         type: Boolean,
         default: false
     }

@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 dotenv.config()
-import { signinSchema, signupSchema } from '../zod.js'
+import { signinSchema, signupSchema } from '../zod/authSchema.js'
 import User from '../models/User.js'
 
 const signup = async (req,res) => {
@@ -42,10 +42,13 @@ const signup = async (req,res) => {
             }
         }
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET)
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' })
 
-        res.cookie('auth-token', token,{
-            httpOnly: true
+        res.cookie('auth-token', token, {
+            httpOnly: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000, 
+            sameSite: 'lax', 
+            secure: process.env.NODE_ENV === 'production' 
         })
 
         const user = await User.findById(newUser._id).select('-password')
@@ -100,10 +103,13 @@ const signin = async (req,res) => {
             }
         }
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET)
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' })
 
         res.cookie('auth-token', token, {
-            httpOnly: true
+            httpOnly: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000, 
+            sameSite: 'lax', 
+            secure: process.env.NODE_ENV === 'production' 
         })
 
         const user = await User.findById(existingUser._id).select('-password')
@@ -124,8 +130,12 @@ const signin = async (req,res) => {
 
 const logout = (req,res) => {
     try {
-        res.clearCookie('auth-token')
-
+        res.clearCookie('auth-token', {
+            httpOnly: true,
+            sameSite: 'lax',
+            secure: process.env.NODE_ENV === 'production'
+          })
+          
         return res.json({
             msg: 'Logout successful'
         })
@@ -144,7 +154,7 @@ const me = (req,res) => {
     try {
 
         if(!token){
-            return res.json({
+            return res.status(401).json({
                 isAuthenticated: false
             })
         }

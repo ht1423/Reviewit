@@ -2,13 +2,8 @@ import React from 'react'
 import Heading from './Heading'
 import Inbox from './Inbox'
 import TestimonialHolder from './TestimonialHolder'
-import useAuthStore from '../../store/authStore'
 
 function Skeleton() {
-
-  const { workspace } = useAuthStore()
-
-  const hasTestimonials = workspace?.testimonials?.length > 0
 
   return (
     <div className='mt-32 '>
@@ -19,7 +14,7 @@ function Skeleton() {
         <div className="lg:flex justify-center w-full">
           <div className=""><Inbox/></div> 
           <div className="flex justify-center w-full">
-            <TestimonialHolder yes={hasTestimonials}/>
+            <TestimonialHolder />
           </div>
         </div>
     </div>

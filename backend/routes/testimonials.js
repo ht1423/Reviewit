@@ -1,10 +1,10 @@
 import express from 'express'
 import authMiddleware from '../middlewares/authMiddleware.js'
-import { createTestimonial } from '../controllers/testimonials.js'
-import { upload } from '../middlewares/multerMiddleware.js'
+import { createTestimonial, generate, getTestimonial } from '../controllers/testimonials.js'
 const router = express.Router()
 
-router.post("/:workspaceId/create", authMiddleware ,upload.single('file'), createTestimonial);
-router.get('/:workspaceId/get', authMiddleware, createTestimonial)
+router.get("/generate", authMiddleware, generate);
+router.post("/:workspaceId/create", authMiddleware, createTestimonial);
+router.get('/:workspaceId/get', authMiddleware, getTestimonial)
 
 export default router

@@ -9,9 +9,7 @@ function CreateTestimonial({yes}) {
             <div className='w-96 h-[1px] bg-gray-300 mb-10 mt-4'></div>
         </div>
         <div className='flex justify-around '>
-            <TestimonialIcons icon='📝' text='Add a text'/>
-            <TestimonialIcons icon='🖼️' text='Add an image'/>
-            <TestimonialIcons icon='🎥' text='Add a video'/>
+            <TestimonialIcons/>
         </div>
     </div>
   )

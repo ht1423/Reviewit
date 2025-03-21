@@ -4,7 +4,6 @@ const WorkspaceSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
     },
     name: {
         type: String,
@@ -23,8 +22,7 @@ const WorkspaceSchema = new mongoose.Schema({
     testimonials: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Testimonial',
-        required: true
-    }]
+    }],
 },{
     timestamps: true
 })

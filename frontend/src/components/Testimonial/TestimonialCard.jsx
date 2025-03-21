@@ -2,16 +2,12 @@ import React from "react";
 import { CgArrowLongRight } from "react-icons/cg";
 import { CgArrowLongLeft } from "react-icons/cg";
 
-const TestimonialCard = ({ name, position, review, stars, image }) => {
+const TestimonialCard = ({ name, review, stars }) => {
   return (
     <div className="bg-white shadow-[0_0_20px_rgba(10,10,10,0.1)] rounded-xl px-10 py-6 w-96 text-center borde mt-10 border border-pink-200">
       <div className="flex space-x-16 justify-center items-center ">
         <div><CgArrowLongLeft /></div>
-        <img
-          src={image}
-          alt={name}
-          className="w-16 h-16 rounded-full mx-auto mb-3 object-cover"
-        />
+        <div className='h-16 w-16 rounded-full flex items-center justify-center bg-[rgb(206,203,250)] font-medium text-3xl pb-[2px] uppercase shrink-0 leading-none'>{name[0]}</div>
         <div><CgArrowLongRight /></div>
       </div>
       
@@ -24,7 +20,6 @@ const TestimonialCard = ({ name, position, review, stars, image }) => {
 
       <h3 className="text-[14px] mt-6 font-semibold text-gray-800 tracking-widest uppercase">{name}</h3>
 
-      <p className="text-xs mt-1 tracking-widest text-gray-500 uppercase">{position}</p>
 
     </div>
   );

@@ -15,11 +15,11 @@ function Inbox() {
                   <h1 className='text-[20px] text-[rgb(46,49,59)] font-medium'>Inbox</h1>
 
                   <div className='mt-6 ml-4'>
-                      <InboxElements text='All' element="📥" />
-                      <InboxElements text='Text' element="💬"/>
-                      <InboxElements text='Image' element="🖼️"/>
-                      <InboxElements text='Video' element="🎥"/>
-                      <InboxElements text='Liked' element="❤️"/>
+                      <InboxElements type='All' element="📥"/>
+                      <InboxElements type='Text' element="💬"/>
+                      <InboxElements type='Image' element="🖼️"/>
+                      <InboxElements type='Video' element="🎥"/>
+                      <InboxElements type='Liked' element="❤️"/>
                   </div>
                 </div>
 

@@ -14,8 +14,8 @@ function Card() {
     e.preventDefault()
     const response = await create(name, description, navigate)
 
-    if(response?.workspaceId){
-      await get(response.workspaceId, navigate)
+    if(response?.workspace?.workspaceId){
+      await get(response.workspace.workspaceId, navigate)
     }
 
   }
@@ -25,7 +25,7 @@ function Card() {
 
       <form onSubmit={handleSubmit} className='flex flex-col'>
 
-        <h1 className='text-[28px] text-[rgb(46,49,59)] xtracking-tight whitespace-nowrap font-semibold text-left mb-10'>Create your workspace</h1>
+        <h1 className='text-[28px] text-[rgb(46,49,59)] tracking-tight whitespace-nowrap font-semibold text-left mb-10'>Create your workspace</h1>
 
         <div>
           <InputBox onChange={((e) => setName(e.target.value))} text='Name' type='text'/>

@@ -3,9 +3,9 @@ import Left from './Left'
 
 function Hero() {
   return (
-    <div className='px-10 md:px-12 lg:px-24 xl:px-40 2xl:px-56 absolute top-36'>
+    <section className='px-10 md:px-12 lg:px-24 xl:px-40 2xl:px-56 absolute top-36'>
         <Left/>
-    </div>
+    </section>
   )
 }
 

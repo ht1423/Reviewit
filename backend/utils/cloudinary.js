@@ -1,31 +1,19 @@
-import { v2 as cloudinary } from 'cloudinary'
-import fs from "fs"
+import cloudinary from "./cloudinaryConfig.js";
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-})
+ const generateSignature = (req, res) => {
+    const timestamp = Math.floor(Date.now() / 1000);
 
-const uploadOnCloudinary = async (localFilePath) => {
-    try {
-        if (!localFilePath) return null;
-        
-        console.log("Uploading file to Cloudinary:", localFilePath); 
-
-        const response = await cloudinary.uploader.upload(localFilePath, {
-            resource_type: "auto",
-            folder: "testimonial",  
-        });
-
-        console.log("File uploaded successfully:", response); 
-
-        return response;
-    } catch (e) {
-        console.error("Error while uploading file on Cloudinary:", e); 
-        fs.unlinkSync(localFilePath); 
-        return null;
+    const signature = cloudinary.utils.api_sign_request(
+      { timestamp, folder: "testimonials" },
+      process.env.CLOUDINARY_API_SECRET
+    );
+  
+    return { 
+      signature, 
+      timestamp, 
+      api_key: process.env.CLOUDINARY_API_KEY, 
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME 
     }
-};
+  };
 
-export default uploadOnCloudinary
+  export default generateSignature

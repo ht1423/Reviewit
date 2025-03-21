@@ -1,50 +1,38 @@
 import Testimonial from "../models/Testimonial.js"
 import User from "../models/User.js"
 import Workspace from "../models/Workspace.js"
-import uploadOnCloudinary from "../utils/cloudinary.js"
-import { testimonialSchema } from "../zod.js"
-import fs from 'fs'
+import generateSignature from "../utils/cloudinary.js"
+import testimonialSchema from '../zod/testimonialSchema.js'
 
+const generate = async (req,res) => {
+    const { signature, timestamp, api_key, cloud_name } = generateSignature()
+
+    if(!signature || !timestamp || !api_key){
+        return res.status(500).json({
+            msg: 'Error while generating signature'
+        })
+    }
+
+    return res.json({
+        signature,
+        timestamp,
+        api_key,
+        cloud_name
+    })
+}
 const createTestimonial = async (req,res) => {
-    const { text } = req.body
-    let mediaUrl = null
+    const { text, mediaUrl, name, type, rating } = req.body
     const userId = req.user.userId
     const workspaceId = req.params.workspaceId
-    const type = req.query.type
 
     try {
-        if(text){ 
-            const check = testimonialSchema.safeParse(req.body)
-            if(!check.success){
-                return res.status(400).json({
-                    errors: check.error.errors.map((err) => ({
-                        field: err.path[0],
-                        message: err.message
-                    }))
-                })
-            }
-        }
-
-
-        if(req.file){
-            console.log("File received", req.file.path)
-
-            const cloudinaryResponse = await uploadOnCloudinary(req.file.path)
-
-            if(!cloudinaryResponse){
-                return res.status(500).json({
-                    msg: 'Error while uploading file on Cloudinary'
-                })
-            }
-
-            mediaUrl = cloudinaryResponse.secure_url
-
-            fs.unlinkSync(req.file.path)
-        }
-
-        if(!text && !mediaUrl){
+        const check = testimonialSchema.safeParse(req.body)
+        if(!check.success){
             return res.status(400).json({
-                msg: 'Text or media is required'
+                errors: check.error.errors.map((err) => ({
+                    field: err.path[0],
+                    message: err.message
+                }))
             })
         }
 
@@ -52,7 +40,9 @@ const createTestimonial = async (req,res) => {
             userId,
             workspaceId,
             type,
+            name,
             text,
+            rating,
             mediaUrl,
             wallOfLove: false
         })
@@ -71,7 +61,7 @@ const createTestimonial = async (req,res) => {
 
         return res.status(201).json({
             msg: 'Testimonial created successfully',
-            newTestimonial
+            newTestimonial,
         })
     }
     catch (e){
@@ -83,12 +73,20 @@ const createTestimonial = async (req,res) => {
     }
 }
 
-const getTeestimonial = async (req,res) => {
+const getTestimonial = async (req,res) => {
     const { type } = req.query
     const workspaceId = req.params.workspaceId
 
     try {
-        const workspace = await Workspace.findbyId(workspaceId).populate('testimonials')
+        const workspace = await Workspace.findById(workspaceId).populate({
+            path: 'testimonials',
+            options: {
+                sort: {
+                    createdAt: -1
+                }
+            },
+            select: 'name text mediaUrl rating wallOfLove type'
+        })
 
         if(!workspace || workspace.testimonials.length === 0){
             return res.status(404).json({
@@ -102,7 +100,11 @@ const getTeestimonial = async (req,res) => {
             testimonials = testimonials.filter((t) => t.type === type)
         }
 
-        return res.json(testimonials)
+        return res.json({
+            msg: 'Testimonials fetched successfully',
+            testimonials,
+          });
+          
         
     }
 
@@ -117,5 +119,6 @@ const getTeestimonial = async (req,res) => {
 
 export {
     createTestimonial,
-    getTeestimonial
+    getTestimonial,
+    generate
 }

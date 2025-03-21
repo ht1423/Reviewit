@@ -23,12 +23,10 @@ const UserSchema = new mongoose.Schema({
     workspaces: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Workspace',
-        required: true
     }],
     testimonials: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Testimonial',
-        required: true
     }]
 },{
     timestamps: true
