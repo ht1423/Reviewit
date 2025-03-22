@@ -44,7 +44,7 @@ const createTestimonial = async (req,res) => {
             text,
             rating,
             mediaUrl,
-            wallOfLove: false
+            liked: false
         })
 
         await User.findByIdAndUpdate(userId, {
@@ -73,43 +73,54 @@ const createTestimonial = async (req,res) => {
     }
 }
 
-const getTestimonial = async (req,res) => {
-    const { type } = req.query
-    const workspaceId = req.params.workspaceId
+const likeTestimonial = async (req,res) => {
+    const { testimonialId, liked, workspaceId } = req.body
 
     try {
-        const workspace = await Workspace.findById(workspaceId).populate({
-            path: 'testimonials',
-            options: {
-                sort: {
-                    createdAt: -1
-                }
-            },
-            select: 'name text mediaUrl rating wallOfLove type'
-        })
+        const testimonial = await Testimonial.findById(testimonialId)
 
-        if(!workspace || workspace.testimonials.length === 0){
-            return res.status(404).json({
-                msg: 'No testimonials found'
+        if(!testimonial){
+            return res.status(400).json({
+                msg: "No Testimonial found"
             })
         }
 
-        let testimonials = workspace.testimonials
+        const workspace = await Workspace.findById(workspaceId)
 
-        if(type && ['text','image','video'].includes(type)){
-            testimonials = testimonials.filter((t) => t.type === type)
+        if(!workspace){
+            return res.status(400).json({
+                msg: "No Workspace found"
+            })
         }
 
-        return res.json({
-            msg: 'Testimonials fetched successfully',
-            testimonials,
-          });
-          
-        
-    }
+        if(testimonial.liked !== liked){
+            await Testimonial.findByIdAndUpdate(testimonialId, {
+                liked
+            })
+        }
 
-    catch (e){
-        console.error('Error while getting testimonial', e)
+        if(liked){
+            await Workspace.findByIdAndUpdate(workspaceId, {
+                $addToSet: {
+                    wallOfLove: testimonialId
+                }
+            })
+        }
+        else{
+            await Workspace.findByIdAndUpdate(workspaceId, {
+                $pull: {
+                    wallOfLove: testimonialId
+                }
+            })
+        }
+
+        return res.status(200).json({
+            msg: 'Done',
+            liked
+        })
+    }
+    catch (error){
+        console.error('Error while liking testimonial', error)
 
         return res.status(500).json({
             msg: 'Internal server error'
@@ -117,8 +128,9 @@ const getTestimonial = async (req,res) => {
     }
 }
 
+
 export {
     createTestimonial,
-    getTestimonial,
-    generate
+    generate,
+    likeTestimonial
 }

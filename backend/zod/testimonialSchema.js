@@ -9,7 +9,7 @@ const testimonialSchema = z
     name: z
       .string()
       .min(1, '🤔 Name cannot be empty! Give us something to work with.')
-      .max(100, '🔠 Keep it short! 100 characters max.'),
+      .max(100, '🔠 Keep it short! Name 100 characters max.'),
     rating: z
       .number()
       .int()

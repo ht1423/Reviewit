@@ -10,10 +10,13 @@ function Workspace() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(workspaceId){
-      get(workspaceId,navigate)
+    const fetchData = async () => {
+      await get(workspaceId, navigate)
     }
-  },[workspaceId,get])
+
+    fetchData()
+    
+  },[workspaceId])
 
   return (
     <div className='overflow-x-hidden mb-20'>

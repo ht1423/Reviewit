@@ -25,6 +25,7 @@ const createWorkspace = async (req,res) => {
 
         const workspaceId = workspace._id
 
+
         await User.findByIdAndUpdate(userId, {
             $push: {
                 workspaces: workspaceId
@@ -34,7 +35,7 @@ const createWorkspace = async (req,res) => {
 
         return res.status(201).json({
             msg: 'Workspace created successfully',
-            workspace
+            workspaceId
         })
     }
     catch (e){
@@ -50,7 +51,7 @@ const getWorkspace = async (req,res) => {
     const { workspaceId } = req.params
 
     try {
-        const workspace = await Workspace.findById(workspaceId)
+        const workspace = await Workspace.findById(workspaceId).populate('testimonials')
         if(!workspace){
             return res.status(404).json({
                 msg: 'Workspace not found'

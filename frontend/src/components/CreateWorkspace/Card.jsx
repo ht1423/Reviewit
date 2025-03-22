@@ -14,8 +14,8 @@ function Card() {
     e.preventDefault()
     const response = await create(name, description, navigate)
 
-    if(response?.workspace?.workspaceId){
-      await get(response.workspace.workspaceId, navigate)
+    if(response?.data?.workspaceId){
+      await get(response.data.workspaceId, navigate)
     }
 
   }

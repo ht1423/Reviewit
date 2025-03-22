@@ -34,7 +34,7 @@ const TestimonialSchema = new mongoose.Schema({
     mediaUrl: {
         type: String,
     },
-    wallOfLove: {
+    liked: {
         type: Boolean,
         default: false
     }

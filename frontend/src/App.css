@@ -139,4 +139,94 @@
   font-style: normal;
 }
 
+.masonry {
+  column-count: 1;
+  column-gap: 2rem;
+  padding: 0 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
 
+@media (min-width: 600px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .masonry {
+    column-count: 1
+  }
+}
+
+@media (min-width: 850px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1250px) {
+  .masonry {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 1600px) {
+  .masonry {
+    column-count: 4;
+  }
+}
+
+
+.dancing-script{
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+.name-width {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  max-width: 300px; 
+  word-wrap: break-word;
+}
+
+@media (min-width: 600px) {
+  .name-width {
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  .name-width {
+    max-width: 350px;
+  }
+}
+
+@media (min-width: 850px) {
+  .name-width {
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 1250px) {
+  .name-width {
+    max-width: 350px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .name-width {
+    max-width: 400px;
+  }
+}
+
+.testimonial-text {
+  max-width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  word-break: break-word;
+}

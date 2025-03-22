@@ -1,15 +1,12 @@
 import React from 'react'
 import useAuthStore from '../../store/authStore'
-import { useParams } from 'react-router-dom'
 
 function InboxElements({type,element}) {
 
-  const { getTestimonials } = useAuthStore()
-  const { workspaceId } = useParams()
+  const setDisplay = useAuthStore((state) => state.setDisplay)
 
-  const handleClick = async () => {
-    console.log("hooo")
-    const response = await getTestimonials(workspaceId,type)
+  const handleClick = () => {
+    setDisplay(type)
   }
 
   return (

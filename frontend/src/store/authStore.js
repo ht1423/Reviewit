@@ -6,10 +6,15 @@ const useAuthStore = create((set) => ({
     isAuthenticated: null,
     isLoading: true,
     route: 'http://localhost:3001/api',
+    display : 'All',
+    filterMode: 'default',
+    setDisplay: (type) => set({ display : type, filterMode: 'default' }),
+    setWallOfLoveMode: () => set({ filterMode: 'wall' }),
 
     fetchUser: async () => {
+        const { route } = useAuthStore.getState()
         try {
-            const res = await axios.get('http://localhost:3001/api/user/me',{
+            const res = await axios.get(`${route}/user/me`,{
                 withCredentials: true
             })
 
@@ -24,6 +29,8 @@ const useAuthStore = create((set) => ({
     },
 
     signup: async (name, email, password, navigate) => {
+        const { route } = useAuthStore.getState()
+
         try {
             await axios.post(`${route}/user/signup`, { name, email, password }, {
                 withCredentials: true
@@ -38,6 +45,8 @@ const useAuthStore = create((set) => ({
     },
 
     signin: async (email, password, navigate) => {
+        const { route } = useAuthStore.getState()
+
         try {
             await axios.post(`${route}/user/signin`, { email, password }, {
                 withCredentials: true
@@ -52,6 +61,8 @@ const useAuthStore = create((set) => ({
     },
 
     logout: async () => {
+        const { route } = useAuthStore.getState()
+
         try {
             await axios.post(`${route}/user/logout`, {}, { withCredentials: true })
             set({ isAuthenticated: false })
@@ -62,12 +73,16 @@ const useAuthStore = create((set) => ({
     },
 
     create: async (name, description, navigate) => {
+        const { route } = useAuthStore.getState()
+
         try {
             const response = await axios.post(`${route}/workspace/create`, { name, description },{
                 withCredentials: true
             })
+
             toast.success('Workspace created successfully 🥳')
-            navigate(`/get/${response.data.workspace.workspaceId}`)
+            navigate(`/get/${response.data.workspaceId}`)
+            return response
         }
         catch (error){
             handleAuthError(error,navigate)
@@ -75,24 +90,27 @@ const useAuthStore = create((set) => ({
     },
 
     get: async (workspaceId, navigate) => {
+        const { route } = useAuthStore.getState()
+
         try {
             if(!workspaceId){
                 throw new Error("Workspace ID is missing ☹️")
             }
-            
             const response = await axios.get(`${route}/workspace/get/${workspaceId}`,{
                 withCredentials: true
             })
 
-            set({ workspace: response.data })
+            set({ workspace: response.data})
             navigate(`/get/${workspaceId}`)
+            return
         }
         catch (error){
             handleAuthError(error,navigate)
         }
     },
 
-    addTestimonial: async (requestBody,navigate, workspaceId, formType) => {
+    addTestimonial: async (requestBody,navigate, workspaceId, formType) => {        
+        const { route } = useAuthStore.getState()
 
         try {
             const response = await axios.post(`${route}/testimonial/${workspaceId}/create?type=${formType}`, requestBody, {
@@ -108,17 +126,16 @@ const useAuthStore = create((set) => ({
         }
     },
 
-    getTestimonials: async (workspaceId,type) => {
-        try {
-            const response = await axios.get(`${route}/testimonial/${workspaceId}/get?${type}`)
+    updateTestimonial: (testimonialId, requestBody) => set((state) => {
+        const updatedTestimonials = state.workspace.testimonials.map((t) => t._id === testimonialId ? { ...t, ...requestBody } : t)
 
-            set({ testimonials: response.data.testimonials })
+        return {
+            workspace: {
+                ...state.workspace,
+                testimonials: updatedTestimonials
+            }
         }
-        catch (error){
-            handleAuthError(error)
-        }
-    }
-    
+    })
 })
 )
 

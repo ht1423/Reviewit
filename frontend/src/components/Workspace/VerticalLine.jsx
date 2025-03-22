@@ -1,8 +1,10 @@
 import React from 'react'
 
-function VerticalLine() {
+function VerticalLine({height}) {
   return (
-    <div className='bg-gray-300 h-[30em] w-[1px]'></div>  )
+    <div className='bg-gray-300 w-[1px]' style={{ height }}></div> 
+
+  )
 }
 
 export default VerticalLine

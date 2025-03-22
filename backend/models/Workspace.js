@@ -23,6 +23,10 @@ const WorkspaceSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Testimonial',
     }],
+    wallOfLove: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Testimonial',
+    }]
 },{
     timestamps: true
 })
