@@ -5,6 +5,7 @@ dotenv.config()
 import connectDB from './db.js'
 import cookieParser from 'cookie-parser'
 const app = express()
+import userRoutes from './routes/user.js'
 
 connectDB()
 
@@ -14,6 +15,8 @@ app.use(cors({
     credentials: true
 }))
 app.use(cookieParser())
+
+app.use('/api/user', userRoutes)
 
 const PORT = process.env.PORT || 3001
 
