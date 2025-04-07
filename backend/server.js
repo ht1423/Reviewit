@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser'
 const app = express()
 import userRoutes from './routes/user.js'
 import workspaceRoutes from './routes/workspace.js'
+import testimonialRoutes from './routes/testimonial.js'
 
 connectDB()
 
@@ -19,6 +20,7 @@ app.use(cookieParser())
 
 app.use('/api/user', userRoutes)
 app.use('/api/workspace', workspaceRoutes)
+app.use('/api/testimonial', testimonialRoutes)
 
 const PORT = process.env.PORT || 3001
 
