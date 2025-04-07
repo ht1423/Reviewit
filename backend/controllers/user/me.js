@@ -8,7 +8,7 @@ const me = async (req,res) => {
     try {
         if(!token){
             return res.json({ 
-                authorized: false
+                authenticated: false
             })
         }
 
@@ -16,7 +16,7 @@ const me = async (req,res) => {
 
         if(!decoded || !decoded.user || !decoded.user.userId){
             return res.json({ 
-                authorized: false
+                authenticated: false
             })
         }
 
@@ -24,13 +24,12 @@ const me = async (req,res) => {
 
         if(!user){
             return res.json({ 
-                authorized: false
+                authenticated: false
             })
         }
 
         return res.json({
-            authorized: true,
-            user
+            authenticated: user
         })
     }
 
