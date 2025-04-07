@@ -1,5 +1,5 @@
 import User from "../models/User.js"
-
+import jwt from 'jsonwebtoken'
 const authMiddleware = async (req,res,next) => {
 
     const token = req.cookies['auth-token']
@@ -27,6 +27,7 @@ const authMiddleware = async (req,res,next) => {
             })
         }
 
+        req.user = decoded.user
         next()
     }
 

@@ -6,6 +6,7 @@ import connectDB from './db.js'
 import cookieParser from 'cookie-parser'
 const app = express()
 import userRoutes from './routes/user.js'
+import workspaceRoutes from './routes/workspace.js'
 
 connectDB()
 
@@ -17,6 +18,7 @@ app.use(cors({
 app.use(cookieParser())
 
 app.use('/api/user', userRoutes)
+app.use('/api/workspace', workspaceRoutes)
 
 const PORT = process.env.PORT || 3001
 
