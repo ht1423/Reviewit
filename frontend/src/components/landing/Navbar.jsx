@@ -12,7 +12,11 @@ function Navbar({showButton}) {
     const { me } = authStore()
       
     useEffect(() => {
-        me()
+      const fetchUser = async () => {
+        await me()
+      }
+
+      fetchUser()
     },[])
 
     useEffect(() => {

@@ -10,9 +10,13 @@ function Card({ action }) {
   const [password, setPassword] = useState("")
   const { signup, signin } = authStore()
 
-  const handleSubmit = () => {
-    if(action === 'signin') signin({ email, password, navigate })
-    else signup({ name, email, password, navigate })
+  const handleSubmit = async () => {
+    if(action === 'signin'){
+      await signin({ email, password, navigate })
+    }
+    else{
+      await signup({ name, email, password, navigate })
+    }
   }
 
   return (

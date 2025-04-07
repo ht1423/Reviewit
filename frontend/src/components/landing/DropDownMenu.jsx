@@ -6,8 +6,8 @@ function DropDownMenu() {
     const navigate = useNavigate()
     const { logout } = authStore()
 
-    const handleClick = () => {
-        logout(navigate)
+    const handleClick = async () => {
+      await logout(navigate)
     }
 
   return (
