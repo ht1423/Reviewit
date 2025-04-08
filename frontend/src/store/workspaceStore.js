@@ -41,6 +41,21 @@ const workspaceStore = create((set, get) => ({
         catch (err) {
             handleWorkspaceError(err)
         }
+    },
+
+    likedTestimonials: async ({ workspaceId, navigate }) => {
+        const route = get().route
+
+        try {
+            const res = await axios.get(`${route}/${workspaceId}/embed-code`,{}, { withCredentials: true })
+
+            console.log("inside workspa", res.data)
+            return res
+        }
+
+        catch (err) {
+            handleWorkspaceError(err)
+        }
     }
 }))
 

@@ -42,7 +42,7 @@ function DisplayTestimonial() {
   }
 
   return (
-    <div className='text-center'>
+    <div className='text-center mb-20'>
       <div className='text-2xl mb-6 font-medium'>Testimonials</div>
       {filteredTestimonials?.length > 0 ?  <div className='flex flex-wrap items-center justify-center gap-10'>
          {filteredTestimonials.map((t) => {
@@ -55,7 +55,7 @@ function DisplayTestimonial() {
                <div>{t.type !== 'text' &&
                 (t.type === 'image' ? 
                   <img src={t.mediaUrl}/> : 
-                  <video src={t.mediaUrl}/>
+                  <video controls src={t.mediaUrl}/>
                 )}</div>
                 
              </div> 

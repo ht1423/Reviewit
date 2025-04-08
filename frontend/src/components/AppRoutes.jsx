@@ -5,6 +5,7 @@ import Auth from '../pages/Auth'
 import CreateWorkspace from '../pages/CreateWorkspace'
 import Workspace from '../pages/Workspace'
 import Testimonial from '../pages/Testimonial'
+import WallOfLove from './workspace/WallOfLove'
 
 function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ function AppRoutes() {
         <Route path='/create' element={<CreateWorkspace/>}/>
         <Route path='/workspace/:workspaceId' element={<Workspace/>}/>
         <Route path='/workspace/:workspaceId/testimonial' element={<Testimonial/>}/>
+        <Route path='/workspace/:workspaceId/wall-of-love' element={<WallOfLove/>}/>
     </Routes>
   )
 }

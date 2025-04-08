@@ -44,4 +44,6 @@ const testimonialSchema = new mongoose.Schema({
     timestamps: true
 })
 
-export default mongoose.model('Testimonial', testimonialSchema)
+const Testimonial = mongoose.models.Testimonial || mongoose.model('Testimonial', testimonialSchema)
+
+export default Testimonial
