@@ -4,7 +4,7 @@ import User from '../../models/User.js'
 import Workspace from '../../models/Workspace.js'
 
 const createTestimonial = async (req,res) => {
-    const { name, content, type } = req.body
+    const { name, content, type, rating, mediaUrl } = req.body
     const { workspaceId } = req.params
     const userId = req.user.userId
 
@@ -25,7 +25,9 @@ const createTestimonial = async (req,res) => {
             workspaceId,
             name,
             content,
+            rating,
             type,
+            mediaUrl,
             liked: false
         })
 

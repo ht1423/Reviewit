@@ -7,15 +7,17 @@ const authMiddleware = async (req,res,next) => {
     try {
         if(!token){
             return res.status(401).json({ 
-               msg: "Unauthorized" 
+               msg: "Unauthorized 1" 
             })
         }
+        console.log("done")
+
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
         if(!decoded || !decoded.user || !decoded.user.userId){
             return res.status(401).json({ 
-                msg: "Unauthorized" 
+                msg: "Unauthorized 2" 
              })
         }
 
@@ -23,7 +25,7 @@ const authMiddleware = async (req,res,next) => {
 
         if(!user){
             return res.status(401).json({ 
-               msg: "Unauthorized" 
+               msg: "Unauthorized 3" 
             })
         }
 

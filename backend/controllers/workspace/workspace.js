@@ -5,7 +5,7 @@ const getWorkspace = async (req,res) => {
     const { workspaceId } = req.params
 
     try {
-        const workspace = await Workspace.findById(workspaceId)
+        const workspace = await Workspace.findById(workspaceId).populate('testimonials')
 
         if(!workspace){
             return res.status(404).json({ msg: "Workspace not found" })

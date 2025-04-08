@@ -4,6 +4,7 @@ import Landing from '../pages/Landing'
 import Auth from '../pages/Auth'
 import CreateWorkspace from '../pages/CreateWorkspace'
 import Workspace from '../pages/Workspace'
+import Testimonial from '../pages/Testimonial'
 
 function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ function AppRoutes() {
         <Route path='/auth' element={<Auth/>}/>
         <Route path='/create' element={<CreateWorkspace/>}/>
         <Route path='/workspace/:workspaceId' element={<Workspace/>}/>
+        <Route path='/workspace/:workspaceId/testimonial' element={<Testimonial/>}/>
     </Routes>
   )
 }

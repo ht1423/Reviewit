@@ -26,6 +26,16 @@ const testimonialSchema = new mongoose.Schema({
         maxLength: 500,
         trim: true
     },
+    rating: {
+        type: Number,
+        min: 0,
+        max: 5,
+        default: 0
+    },
+    mediaUrl: {
+        type: String,
+        trim: true
+    },
     liked: {
         type: Boolean,
         default: false

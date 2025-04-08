@@ -15,7 +15,7 @@ const workspaceStore = create((set, get) => ({
             set({ workspace: response.data.workspace })
 
             toast.success("Workspace created successfully")
-            navigate(`/workspace/${response.data.workspace._id}`)
+            navigate(`/workspace/${response.data.workspace._id}?type=All`)
         }
 
         catch (err){
@@ -23,13 +23,17 @@ const workspaceStore = create((set, get) => ({
         }
     },
 
-    get: async ({ workspaceId }) => {
+    get: async ({ workspaceId, navigate }) => {
+
         const route = get().route
 
         try {
             const response = await axios.get(`${route}/${workspaceId}`, { withCredentials: true })
 
             set({ workspace: response.data.workspace })
+
+            console.log("dsdkdjfgh")
+            navigate(`/workspace/${response.data.workspace._id}?type=All`)
 
             return response
         }
