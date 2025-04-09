@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom'
 
 function EmbedCode() {
 
-    const { workspaceId } = useParams();  
+  const { workspaceId } = useParams();  
 
-  const embedCode = `<iframe src="https://localhost.5173/workspace/${workspaceId}/wall-of-love" width="100%" height="500px" style="border:none;"></iframe>`
+  const embedCode = `<iframe src="http://localhost.5173/workspace/${workspaceId}/wall-of-love" width="100%" height="1000px" style="border:none;"></iframe>`
 
   return (
     <div className="bg-gray-100 p-4 rounded">

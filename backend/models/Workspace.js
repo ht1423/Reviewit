@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 const workspaceSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     name: {
         type: String,
@@ -17,7 +18,15 @@ const workspaceSchema = new mongoose.Schema({
         ref: 'Testimonial'
     }],  
 },{
-    timestamps: true
+    timestamps: true,
+})
+
+workspaceSchema.set('toJSON',{
+    transform: (_,ret) => {
+        ret.id = ret._id
+        delete ret._id
+        delete ret.__v
+    }
 })
 
 

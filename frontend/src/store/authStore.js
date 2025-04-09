@@ -4,7 +4,8 @@ import { toast } from 'react-toastify'
 
 const authStore = create((set,get) => ({
     route: 'http://localhost:3001/api/user',
-    authenticated: null,
+    authenticated: false,
+    user: null,
 
     signup: async ({ name, email, password, navigate }) => {
         const route = get().route
@@ -12,7 +13,6 @@ const authStore = create((set,get) => ({
         try {
             await axios.post(`${route}/signup`, { name, email, password}, { withCredentials: true })
 
-            set({ authenticated: true })
             toast.success("Account created successfully")
             navigate('/dashboard')
         }
@@ -27,7 +27,6 @@ const authStore = create((set,get) => ({
         try {
             await axios.post(`${route}/signin`, { email, password}, { withCredentials: true })
 
-            set({ authenticated: true })
             toast.success("Signed in successfully")
             navigate('/dashboard')
         }
@@ -41,11 +40,11 @@ const authStore = create((set,get) => ({
 
         try {
             const response = await axios.get(`${route}/me`, { withCredentials: true })
-
-            set({ authenticated: response.data.authenticated })
+            set({ authenticated: response.data.authenticated, user: response.data.user })
         }
         catch (err){
             handleAuthError(err)
+            set({ authenticated: false, user: null })
         }
     },
 
@@ -53,7 +52,7 @@ const authStore = create((set,get) => ({
         const route = get().route
 
         try {
-            await axios.post(`${route}/logout`, null, { withCredentials: true })
+            await axios.post(`${route}/logout`, {}, { withCredentials: true })
 
             set({ authenticated: false })
             toast.success("Log out successfully")

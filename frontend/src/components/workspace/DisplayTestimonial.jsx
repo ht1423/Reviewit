@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import workspaceStore from '../../store/workspaceStore'
 import { useSearchParams } from 'react-router-dom'
 import testimonialStore from '../../store/testimonialStore'
+import TestimonialList from './TestimonialList'
 
 function DisplayTestimonial() {
 
@@ -34,7 +35,7 @@ function DisplayTestimonial() {
     await likeUpdate({testimonialId})
 
     setAllTestimonials(prev => 
-      prev.map(t => t._id === testimonialId ? {
+      prev.map(t => t.id === testimonialId ? {
         ...t, liked: !t.liked
       } : t
     )
@@ -44,25 +45,7 @@ function DisplayTestimonial() {
   return (
     <div className='text-center mb-20'>
       <div className='text-2xl mb-6 font-medium'>Testimonials</div>
-      {filteredTestimonials?.length > 0 ?  <div className='flex flex-wrap items-center justify-center gap-10'>
-         {filteredTestimonials.map((t) => {
-           return (
-             <div key={t._id} className='flex flex-col items-center justify-center'>
-              <button onClick={() => handleLike(t._id)} className={` p-2 rounded cursor-pointer ${t.liked === true ? 'bg-red-400 hover:bg-gray-200' : 'bg-gray-300 hover:bg-red-300'}`}>liked</button>
-               <div className='text-xl font-medium'>{t.name}</div>
-               <div className='text-lg'>{t.content}</div>
-               <div>{t.rating}</div>
-               <div>{t.type !== 'text' &&
-                (t.type === 'image' ? 
-                  <img src={t.mediaUrl}/> : 
-                  <video controls src={t.mediaUrl}/>
-                )}</div>
-                
-             </div> 
-           )
-         })}
-      </div> : 
-      <div>No testimonials yet... emotional damage</div>}
+        <TestimonialList testimonials={filteredTestimonials} handleLike={handleLike}/>
     </div>
   )
 }

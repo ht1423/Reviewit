@@ -15,7 +15,8 @@ const workspaceStore = create((set, get) => ({
             set({ workspace: response.data.workspace })
 
             toast.success("Workspace created successfully")
-            navigate(`/workspace/${response.data.workspace._id}?type=All`)
+
+            navigate(`/workspace/${response.data.workspace.id}?type=all`)
         }
 
         catch (err){
@@ -32,8 +33,7 @@ const workspaceStore = create((set, get) => ({
 
             set({ workspace: response.data.workspace })
 
-            console.log("dsdkdjfgh")
-            navigate(`/workspace/${response.data.workspace._id}?type=All`)
+            navigate(`/workspace/${response.data.workspace.id}?type=all`)
 
             return response
         }
@@ -43,7 +43,7 @@ const workspaceStore = create((set, get) => ({
         }
     },
 
-    likedTestimonials: async ({ workspaceId, navigate }) => {
+    likedTestimonials: async ({ workspaceId }) => {
         const route = get().route
 
         try {

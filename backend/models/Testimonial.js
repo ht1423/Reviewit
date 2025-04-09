@@ -3,11 +3,13 @@ import mongoose from 'mongoose'
 const testimonialSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     workspaceId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Workspace'
+        ref: 'Workspace',
+        required: true
     },
     name: {
         type: String,
@@ -42,6 +44,14 @@ const testimonialSchema = new mongoose.Schema({
     }
 },{
     timestamps: true
+})
+
+testimonialSchema.set('toJSON', { 
+    transform: (_, ret) => {
+        ret.id = ret._id
+        delete ret._id
+        delete ret.__v
+    }
 })
 
 const Testimonial = mongoose.models.Testimonial || mongoose.model('Testimonial', testimonialSchema)

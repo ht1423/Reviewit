@@ -5,18 +5,14 @@ import DropDownMenu from '../landing/DropDownMenu'
 
 function Navbar({showButton}) {
     const navigate = useNavigate()
-    const { authenticated } = authStore()
+    const authenticated = authStore(state => state.authenticated)
+    const me = authStore(state => state.me)
+    const user = authStore(state => state.user)
     const [visible, setVisible] = useState(false)
     const ref = useRef()
 
-    const { me } = authStore()
-      
     useEffect(() => {
-      const fetchUser = async () => {
-        await me()
-      }
-
-      fetchUser()
+      me().catch(err => console.error("Error fetching user: ", err))      
     },[])
 
     useEffect(() => {
@@ -42,9 +38,7 @@ function Navbar({showButton}) {
 
           authenticated === false ? <button onClick={() => navigate('/auth?action=signin')} className='border p-2 hover:bg-gray-200 cursor-pointer'>Get Started</button> : 
 
-          <div className='' ref={ref}>
-
-            <div onClick={() => setVisible(pre => !pre)} className='border h-8 w-8 rounded-full flex items-center justify-center text-xl cursor-pointer'>{authenticated?.name[0]?.toUpperCase()}</div>
+          <div ref={ref} onClick={() => setVisible(pre => !pre)} className='border h-8 w-8 rounded-full flex items-center justify-center text-xl cursor-pointer'>{user?.name[0]?.toUpperCase()}
 
             {visible && <DropDownMenu/>}
 

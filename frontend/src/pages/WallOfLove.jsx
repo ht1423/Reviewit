@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import workspaceStore from '../../store/workspaceStore'
+import workspaceStore from '../store/workspaceStore'
 
 function WallOfLove() {
   const { workspaceId } = useParams()
@@ -27,7 +27,7 @@ function WallOfLove() {
       {testimonials.length > 0 ? (
         <div className='flex flex-wrap justify-center gap-12'>
           {testimonials.map(t => (
-            <div key={t._id} className='bg-gray-100 p-6 rounded-xl shadow-md w-full max-w-xs'>
+            <div key={t.id} className='bg-gray-100 p-6 rounded-xl shadow-md w-full max-w-xs'>
               <h2 className='text-xl font-semibold'>{t.name}</h2>
               
               <p className='text-base text-gray-700 mt-2 mb-3'>{t.content}</p>

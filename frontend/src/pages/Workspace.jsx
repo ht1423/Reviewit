@@ -16,7 +16,7 @@ function Workspace() {
         }
 
         fetchWorkspace()
-    },[workspaceId])
+    },[workspaceId,navigate])
 
   return (
     <div className=''>

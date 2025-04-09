@@ -6,8 +6,7 @@ import embedCode from '../controllers/workspace/embedCode.js'
 const router = express.Router()
 
 router.post('/create', authMiddleware,createWorkspace)
-router.get('/:workspaceId', getWorkspace)
-console.log("oliefh")
 router.get('/:workspaceId/embed-code', embedCode)
+router.get('/:workspaceId', getWorkspace)
 
 export default router

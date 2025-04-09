@@ -3,11 +3,8 @@ import Workspace from "../../models/Workspace.js"
 import zodWorkspace from "../../zod/workspace.js"
 
 const createWorkspace = async (req,res) => {
-    const { name } = req.body
-    const userId = req.user.userId
 
-    try {
-        const check = zodWorkspace.safeParse(req.body)
+    const check = zodWorkspace.safeParse(req.body)
 
         if(!check.success){
             return res.status(400).json({
@@ -18,6 +15,10 @@ const createWorkspace = async (req,res) => {
             })
         }
 
+    const { name } = req.body
+    const userId = req.user.userId
+
+    try {
         const workspace = await Workspace.create({
             userId,
             name
@@ -30,7 +31,7 @@ const createWorkspace = async (req,res) => {
         })
 
         return res.status(201).json({
-            msg: 'workspace create successfully',
+            msg: 'workspace created successfully',
             workspace
         })
     }

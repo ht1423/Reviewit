@@ -29,7 +29,8 @@ const me = async (req,res) => {
         }
 
         return res.json({
-            authenticated: user
+            authenticated: true,
+            user
         })
     }
 

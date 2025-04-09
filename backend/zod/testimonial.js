@@ -6,27 +6,21 @@ const zodTestimonial = z.object({
     content: z.string().max(500, "Content can be at most 500 characters long").optional(),
     rating: z.number().min(0).max(5).optional(),
     mediaUrl: z.string().optional()
-}).refine(
-    (data) => {
-        if(data.type === 'text'){
-            return data?.content?.length > 0
-        }
-        return true
-    },{
-        message: "Content is required for text testimonials",
-        path: ["content"]
+}).strict().superRefine((data,ctx) => {
+    if(data.type === 'text' && !data.content?.length){
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Content is required for text testimonials",
+            path: ["content"]
+        })
     }
-).refine(
-    (data) => {
-        if(data.type !== 'text'){
-            return data?.mediaUrl?.length > 0
-        }
-        return true
+    if(data.type !== 'text' && !data.mediaUrl?.length){
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Media URL is required for image and video testimonials",
+            path: ["mediaUrl"]
+        }) 
     }
-    ,{
-        message: "Media URL is required for image and video testimonials",
-        path: ["mediaUrl"]
-    }
-)
+})
 
 export default zodTestimonial

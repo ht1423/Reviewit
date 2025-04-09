@@ -4,12 +4,8 @@ import User from '../../models/User.js'
 import Workspace from '../../models/Workspace.js'
 
 const createTestimonial = async (req,res) => {
-    const { name, content, type, rating, mediaUrl } = req.body
-    const { workspaceId } = req.params
-    const userId = req.user.userId
 
-    try {
-        const check = zodTestimonial.safeParse(req.body)
+    const check = zodTestimonial.safeParse(req.body)
 
         if(!check.success){
             return res.status(400).json({
@@ -20,6 +16,11 @@ const createTestimonial = async (req,res) => {
             })
         }
 
+    const { name, content, type, rating, mediaUrl } = req.body
+    const { workspaceId } = req.params
+    const userId = req.user.userId
+
+    try {
         const testimonial = await Testimonial.create({
             userId,
             workspaceId,
@@ -31,17 +32,12 @@ const createTestimonial = async (req,res) => {
             liked: false
         })
 
-        await User.findByIdAndUpdate(userId, {
-            $push: {
-                testimonials: testimonial._id
-            }
-        })
+        const pushTestimonial = { $push: { testimonials: testimonial._id } }
 
-        await Workspace.findByIdAndUpdate(workspaceId, {
-            $push: {
-                testimonials: testimonial._id
-            }
-        })
+        await Promise.all([
+            User.findByIdAndUpdate(userId, pushTestimonial),
+            Workspace.findByIdAndUpdate(workspaceId, pushTestimonial)
+        ])
 
         return res.status(201).json({
             msg: 'Testimonial created successfully',

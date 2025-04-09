@@ -16,8 +16,12 @@ function Skeleton() {
         <Heading/>
         <Inbox/>
         <TestimonialButton/>
-        <button className='bg-red-400 hover:opacity-70 text-white font-bold py-2 px-4 rounded cursor-pointer' onClick={() => navigate(`/workspace/${workspaceId}/wall-of-love`)
-}>Wall of Love</button>
+        <button 
+          onClick={() => navigate(`/workspace/${workspaceId}/wall-of-love`)} 
+          className='bg-red-400 hover:opacity-70 text-white font-bold py-2 px-4 rounded cursor-pointer'>
+          Wall of Love
+        </button>
+
         <EmbedCode/>
         <DisplayTestimonial/>
     </div>

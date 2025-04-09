@@ -10,8 +10,6 @@ const authMiddleware = async (req,res,next) => {
                msg: "Unauthorized 1" 
             })
         }
-        console.log("done")
-
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
 

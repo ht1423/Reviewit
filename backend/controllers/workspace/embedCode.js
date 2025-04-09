@@ -1,9 +1,7 @@
-import Workspace from '../../models/workspace.js'
+import Workspace from '../../models/Workspace.js'
 
 const embedCode = async (req,res) => {
     const { workspaceId } = req.params
-
-    console.log("dslkhfdsh")
 
     try {
         const workspace = await Workspace.findById(workspaceId).populate('testimonials')

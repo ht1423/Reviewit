@@ -4,10 +4,8 @@ import { zodSignin } from '../../zod/user.js'
 import bcrypt from 'bcryptjs'
 
 const signin = async (req,res) => {
-    const { email, password } = req.body
 
-    try {
-        const check = zodSignin.safeParse(req.body)
+    const check = zodSignin.safeParse(req.body)
 
         if(!check.success){
             return res.status(400).json({
@@ -18,6 +16,9 @@ const signin = async (req,res) => {
             })
         }
 
+    const { email, password } = req.body
+
+    try {
         const existingUser = await User.findOne({ email })
 
         if(!existingUser){
@@ -40,15 +41,18 @@ const signin = async (req,res) => {
             }
         }
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET)
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
 
         res.cookie('auth-token', token, {
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production'
         })
+
+        const user = await User.findById(existingUser._id).select('-password')
 
         return res.json({
             msg: 'User signed in successfully',
-            existingUser
+            user
         })
     }
     catch (err){

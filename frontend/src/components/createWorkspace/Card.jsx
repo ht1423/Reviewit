@@ -6,9 +6,9 @@ import workspaceStore from '../../store/workspaceStore'
 function Card() {
   const navigate = useNavigate()
   const [name, setName] = useState("")
-  const { create } = workspaceStore()
+  const create = workspaceStore(state => state.create)
 
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     await create({ name, navigate })
   }
 
@@ -18,7 +18,7 @@ function Card() {
       <div>
         <Input text='Name' onChange={(e) => setName(e.target.value)}/>
       </div>
-      <button onClick={handleClick} className='bg-blue-500 hover:opacity-70 text-white font-bold py-2 px-4 rounded cursor-pointer'>Submit</button>
+      <button onClick={handleSubmit} className='bg-blue-500 hover:opacity-70 text-white font-bold py-2 px-4 rounded cursor-pointer'>Submit</button>
       
     </div>
   )

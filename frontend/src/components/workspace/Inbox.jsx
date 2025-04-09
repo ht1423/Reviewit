@@ -6,11 +6,9 @@ function Inbox() {
     <div className='text-center space-y-6'>
       <div className='text-xl font-medium'>Inbox</div>
       <div className='flex justify-around items-center'>
-        <InboxElements type='All'/>
-        <InboxElements type='Text'/>
-        <InboxElements type='Image'/>
-        <InboxElements type='Video'/>
-        <InboxElements type='Liked'/>
+        {['All','Text','Image','Video','Liked'].map((type) => (
+          <InboxElements key={type} type={type} />
+        ))}
       </div>
     </div>
   )

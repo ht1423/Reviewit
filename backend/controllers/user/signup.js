@@ -4,10 +4,8 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
 const signup = async (req,res) => {
-    const { name, email, password } = req.body
 
-    try {
-        const check = zodSignup.safeParse(req.body);
+    const check = zodSignup.safeParse(req.body);
 
         if(!check.success){
             return res.status(400).json({
@@ -17,7 +15,10 @@ const signup = async (req,res) => {
                 }))
             })
         }
+        
+    const { name, email, password } = req.body
 
+    try {
         const existingUser = await User.findOne({ email })
 
         if(existingUser){
@@ -41,15 +42,18 @@ const signup = async (req,res) => {
             }
         }
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET)
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
 
         res.cookie('auth-token', token, {
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production'
         })
+
+        const user = await User.findById(newUser._id).select('-password')
 
         return res.status(201).json({
             msg: 'User created successfully',
-            newUser
+            user
         })
     }
     catch (err){
