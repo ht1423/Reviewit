@@ -1,17 +1,17 @@
-import React from 'react'
-import InboxElements from './InboxElements'
+import React from 'react';
+import InboxElements from './InboxElements';
 
 function Inbox() {
   return (
-    <div className='text-center space-y-6'>
-      <div className='text-xl font-medium'>Inbox</div>
-      <div className='flex justify-around items-center'>
-        {['All','Text','Image','Video','Liked'].map((type) => (
+    <div className="text-center mt-32">
+      <div className="text-[26px] font-semibold text-zinc-300 mb-12">Inbox</div>
+      <div className="flex justify-center items-center flex-wrap gap-10">
+        {['All', 'Text', 'Image', 'Video', 'Liked'].map((type) => (
           <InboxElements key={type} type={type} />
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default Inbox
+export default Inbox;

@@ -1,0 +1,53 @@
+
+.major-mono-display-regular {
+    font-family: "Major Mono Display", monospace;
+    font-style: normal;
+  }
+
+  .poiret-one-regular {
+    font-family: "Poiret One", sans-serif;
+    font-style: normal;
+  }
+  
+  @keyframes heartPop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.4);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  
+  .wallColumn {
+    max-width: 1600px;
+    column-count: 1;
+    column-gap: 1.5rem;
+  }
+  
+  @media (min-width: 740px) {
+    .wallColumn {
+      column-count: 2;
+    }
+  }
+  @media (min-width: 1100px) {
+    .wallColumn {
+      column-count: 3;
+    }
+  }
+  @media (min-width: 1500px) {
+    .wallColumn {
+      column-count: 4;
+    }
+  }
+
+::-webkit-scrollbar {
+  display: none;
+}
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}

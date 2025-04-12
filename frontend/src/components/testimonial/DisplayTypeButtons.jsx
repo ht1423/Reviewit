@@ -1,14 +1,20 @@
-import React from 'react';
-import DisplayType from './DisplayType';
+import DisplayType from './DisplayType'
 
-const DisplayTypeButtons = ({ handleClick }) => {
+const DisplayTypeButtons = ({ handleClick, activeType }) => {
+    const types = ['text', 'image', 'video'];
+
     return (
-        <div className="flex justify-around items-center gap-8">
-            <DisplayType displayType="Text" onClick={() => handleClick('text')} />
-            <DisplayType displayType="Image" onClick={() => handleClick('image')} />
-            <DisplayType displayType="Video" onClick={() => handleClick('video')} />
+        <div className="flex justify-between gap-4">
+            {types.map((type) => (
+                <DisplayType
+                    key={type}
+                    displayType={type}
+                    activeType={activeType}
+                    onClick={() => handleClick(type)}
+                />
+            ))}
         </div>
     );
 };
 
-export default DisplayTypeButtons;
+export default DisplayTypeButtons

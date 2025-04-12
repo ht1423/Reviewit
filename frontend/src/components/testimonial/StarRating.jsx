@@ -4,7 +4,7 @@ const StarRating = ({ value, onChange }) => {
   const [hovered, setHovered] = useState(0)
 
   return (
-    <div className="flex gap-2 text-3xl cursor-pointer">
+    <div className="flex justify-center gap-1 text-3xl cursor-pointer">
       {[1, 2, 3, 4, 5].map((index) => (
         <span
           key={index}

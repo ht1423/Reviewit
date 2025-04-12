@@ -48,7 +48,7 @@ const authStore = create((set,get) => ({
         }
     },
 
-    logout: async ({navigate}) => {
+    logout: async (navigate) => {
         const route = get().route
 
         try {

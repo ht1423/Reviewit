@@ -20,6 +20,20 @@ const createTestimonial = async (req,res) => {
     const { workspaceId } = req.params
     const userId = req.user.userId
 
+    const workspace = await Workspace.findById(workspaceId)
+
+    if(!workspace){
+        return res.status(404).json({    
+            msg: "Workspace not found"
+        })
+    }
+
+    if(userId === workspace.userId.toString()){
+        return res.status(403).json({    
+            msg: "You cannot create a testimonial for your own workspace"
+        })
+    }
+
     try {
         const testimonial = await Testimonial.create({
             userId,

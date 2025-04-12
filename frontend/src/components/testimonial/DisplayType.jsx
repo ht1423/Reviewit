@@ -1,10 +1,15 @@
-import React from 'react'
-
-function DisplayType({displayType, onClick}) {
+function DisplayType({ displayType, onClick, activeType }) {
+  const isActive = displayType === activeType;
 
   return (
-    <div onClick={onClick} className='border h-8 w-20 flex justify-center items-center cursor-pointer hover:bg-gray-200'>{displayType}</div>
-  )
+      <div 
+          onClick={onClick} 
+          className={` w-20 flex items-center justify-center h-8 text-sm sm:text-base transition duration-150 text-white ease-in-out cursor-pointer 
+          ${isActive ? 'bg-gray-600 text-gray-500' : 'hover:opacity-70'}`}
+      >
+          {displayType.charAt(0).toUpperCase() + displayType.slice(1)}
+      </div>
+  );
 }
 
 export default DisplayType

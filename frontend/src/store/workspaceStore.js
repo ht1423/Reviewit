@@ -16,7 +16,7 @@ const workspaceStore = create((set, get) => ({
 
             toast.success("Workspace created successfully")
 
-            navigate(`/workspace/${response.data.workspace.id}?type=all`)
+            navigate(`/workspace/${response.data.workspace.id}?type=all`, {replace: true})
         }
 
         catch (err){
@@ -33,7 +33,7 @@ const workspaceStore = create((set, get) => ({
 
             set({ workspace: response.data.workspace })
 
-            navigate(`/workspace/${response.data.workspace.id}?type=all`)
+            navigate(`/workspace/${response.data.workspace.id}?type=all`, {replace: true}) 
 
             return response
         }

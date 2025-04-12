@@ -4,19 +4,22 @@ import Input from '../auth/Input';
 
 const TestimonialForm = ({ setName, setContent, displayType, mediaOnly }) => {
     return (
-        <div>
+        <div className="space-y-4">
+        <Input text="Name" onChange={(e) => setName(e.target.value)} />
 
-            <Input text="Name" onChange={(e) => setName(e.target.value)} />
-
-            {(displayType === 'text' || (displayType !== 'text' && !mediaOnly)) && (
-                <div>
-                    <div>Content</div>
-                    <textarea onChange={(e) => setContent(e.target.value)} className="border w-full p-2 mt-4"></textarea>
-                </div>
-            )}
-
-            
+        {(displayType === 'text' || (displayType !== 'text' && !mediaOnly)) && (
+            <div >
+                <label className="text-base text-white/80 font-medium ">Content</label>
+                <textarea
+                    onChange={(e) => setContent(e.target.value)}
+                    className="w-full p-3 mt-4 rounded-md bg-[#2a2a2a] text-white focus:outline-none focus:ring-2 focus:ring-gray-500 transition"
+                    rows={4}
+                    placeholder="Write something nice..."
+                />
+            </div>
+        )}
         </div>
+
     );
 };
 

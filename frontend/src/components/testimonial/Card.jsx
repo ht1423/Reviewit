@@ -18,10 +18,9 @@ function Card() {
     const displayType = searchParams.get('type');
     const [rating, setRating] = useState(0);
     const [mediaOnly, setMediaOnly] = useState(false);
-    const [fileName, setFileName] = useState('');
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
-    const [fileType, setFileType] = useState('');
+    const [file, setFile] = useState('');
     const createTestimonial = testimonialStore(state => state.createTestimonial);
     const navigate = useNavigate();
 
@@ -37,19 +36,18 @@ function Card() {
     };
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        setFileName(file);
-        setFileType(file.type);
+        const selectedFile = e.target.files[0];
+        if (!selectedFile) return;
+        setFile(selectedFile);
     };
 
     const fileTypeCheck = () => {
         const imageType = ['image/png', 'image/jpeg', 'image/jpg'];
         const videoType = ['video/mp4', 'video/ogg', 'video/webm'];
 
-        if (displayType === 'image' && !imageType.includes(fileType)) {
+        if (displayType === 'image' && !imageType.includes(file?.type)) {
             return false;
-        } else if (displayType === 'video' && !videoType.includes(fileType)) {
+        } else if (displayType === 'video' && !videoType.includes(file?.type)) {
             return false;
         }
         return true;
@@ -65,7 +63,7 @@ function Card() {
             let mediaUrl = "";
 
             if (displayType !== 'text') {
-                if (!fileType) {
+                if (!file?.type) {
                     toast.error("Please select a file");
                     return;
                 }
@@ -81,7 +79,7 @@ function Card() {
                 const { signature, timestamp, apiKey } = signRes.data;
 
                 const formData = new FormData();
-                formData.append("file", fileName);
+                formData.append("file", file);
                 formData.append("signature", signature);
                 formData.append("timestamp", timestamp);
                 formData.append("api_key", apiKey);
@@ -113,27 +111,37 @@ function Card() {
     };
 
     return (
-        <div className="border p-10 text-center space-y-8">
-            <DisplayTypeButtons handleClick={handleClick} />
-   
-            <div className="text-2xl font-medium">Add a {displayType} testimonial to</div>
-            <div>{workspace?.name}</div>
+        <div className="flex flex-col p-6 sm:p-10 rounded-2xl w-full max-w-md lg:max-w-[480px] bg-[#1a1a1a] shadow-xl text-white space-y-8">
 
-            <div className="flex justify-center mb-8">
+            <DisplayTypeButtons handleClick={handleClick} activeType={displayType}/>
+   
+            <div className="text-xl sm:text-[26px] font-medium text-center">Add a {displayType} testimonial to</div>
+            <div className='text-center text-lg sm:text-xl'>{workspace?.name}</div>
+
+            <div className="flex justify-center ">
                 <StarRating value={rating} onChange={setRating} />
             </div>
 
             {displayType !== 'text' && (
                 <button
                     onClick={() => setMediaOnly(prev => !prev)}
-                    className={`${mediaOnly ? 'bg-blue-500' : 'bg-gray-500'} hover:opacity-70 text-white font-bold py-2 px-8 rounded cursor-pointer`}
+                    className={`
+                        ${mediaOnly ? 'bg-gray-700 hover:opacity-70 text-white' : 'bg-transparent text-gray-300 hover:bg-gray-700 hover:text-white'}
+                        border border-gray-600 
+                        font-medium 
+                        w-[160px] h-[44px] cursor-pointer 
+                        rounded-lg 
+                        transition duration-150 
+                        self-center
+                    `}
                 >
-                    {displayType === 'image' ? 'image only' : 'Video only'}
+                    {displayType === 'image' ? 'Image Only' : 'Video Only'}
                 </button>
             )}
 
+
             {displayType !== 'text' && (
-                <FileUpload displayType={displayType} handleFileChange={handleFileChange} />
+                <FileUpload displayType={displayType} fileName={file?.name} handleFileChange={handleFileChange} />
             )}
 
             <TestimonialForm
@@ -143,7 +151,7 @@ function Card() {
                 mediaOnly={mediaOnly}
             />
 
-            <button onClick={handleSubmit} className="bg-blue-500 hover:opacity-70 text-white font-bold py-2 px-8 rounded cursor-pointer">Add it</button>
+            <button onClick={handleSubmit} className="bg-indigo-700 hover:opacity-70 text-white font-bold py-2 px-8 rounded cursor-pointer">Add it</button>
         </div>
     );
 }

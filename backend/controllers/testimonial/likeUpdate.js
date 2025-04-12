@@ -2,6 +2,7 @@ import Testimonial from "../../models/Testimonial.js"
 
 const likeUpdate = async (req,res) => {
     const { testimonialId } = req.params
+    const userId = req.user.userId
 
     try {
 
@@ -9,6 +10,10 @@ const likeUpdate = async (req,res) => {
 
         if(!testimonial){
             return res.status(404).json({msg: "Testimonial not found"})
+        }
+
+        if(testimonial.userId.toString() !== userId){
+            return res.status(403).json({msg: "Only the creator can update the like"})
         }
 
         testimonial.liked = !testimonial.liked

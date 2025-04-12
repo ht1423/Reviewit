@@ -43,8 +43,8 @@ function DisplayTestimonial() {
   }
 
   return (
-    <div className='text-center mb-20'>
-      <div className='text-2xl mb-6 font-medium'>Testimonials</div>
+    <div className='text-center py-24'>
+      <div className='text-4xl mb-8 font-medium '>Testimonials</div>
         <TestimonialList testimonials={filteredTestimonials} handleLike={handleLike}/>
     </div>
   )

@@ -3,13 +3,13 @@ import TestimonialCard from './TestimonialCard'
 
 const TestimonialList = ({ testimonials, handleLike }) => {
   return (
-    <div className='flex flex-wrap items-center justify-center gap-10'>
+    <div className='flex flex-col justify-center items-center  mx-4 sm:max-0'>
       {testimonials?.length > 0 ?
       (
         testimonials.map(testimonial => (
         <TestimonialCard key={testimonial.id} testimonial={testimonial} handleLike={handleLike} />
       ))) : 
-      <div>No testimonials found</div>
+      <div className='text-xl text-zinc-400'>No testimonials found 😭😭</div>
       }
     </div>
   )

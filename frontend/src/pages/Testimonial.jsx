@@ -5,12 +5,13 @@ import Card from '../components/testimonial/Card'
 function Testimonial() {
 
   return (
-    <div className=''>
-        <Navbar showButton={true}/>
-        <div className='flex justify-center items-center h-screen'>
-            <Card/>
-        </div>
+    <div className='bg-[#0f0f0f] min-h-screen w-full '>
+      <Navbar showButton={true}/>
+      <div className='flex justify-center items-center flex-1 w-full px-6 py-10'>
+        <Card/>
+      </div>
     </div>
+
   )
 }
 

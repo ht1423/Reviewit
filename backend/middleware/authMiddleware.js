@@ -7,7 +7,7 @@ const authMiddleware = async (req,res,next) => {
     try {
         if(!token){
             return res.status(401).json({ 
-               msg: "Unauthorized 1" 
+               msg: "Unauthorized. No token found" 
             })
         }
 
@@ -15,7 +15,7 @@ const authMiddleware = async (req,res,next) => {
 
         if(!decoded || !decoded.user || !decoded.user.userId){
             return res.status(401).json({ 
-                msg: "Unauthorized 2" 
+                msg: "Unauthorized. Invalid token" 
              })
         }
 
@@ -23,7 +23,7 @@ const authMiddleware = async (req,res,next) => {
 
         if(!user){
             return res.status(401).json({ 
-               msg: "Unauthorized 3" 
+               msg: "Unauthorized. User not found" 
             })
         }
 

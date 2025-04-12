@@ -20,7 +20,7 @@ const me = async (req,res) => {
             })
         }
 
-        const user = await User.findById(decoded.user.userId).select('-password')
+        const user = await User.findById(decoded.user.userId).select('-password').populate('workspaces')
 
         if(!user){
             return res.json({ 
