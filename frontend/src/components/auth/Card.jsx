@@ -25,7 +25,7 @@ function Card({ action }) {
   const toggleAction = action === 'signin' ? () => navigate('/auth?action=signup') : () => navigate('/auth?action=signin')
 
   return (
-    <div className='flex flex-col p-10 rounded-xl  w-full max-w-md lg:max-w-[480px] mb-10 sm:mb-28'>
+    <div className='flex flex-col p-10 rounded-xl  w-full max-w-md lg:max-w-[480px] mb-14 sm:mb-28'>
       <div className='text-[24px] sm:text-[30px] lg:text-[32px] whitespace-nowrap text-white mb-10 sm:mb-16 text-center font-medium poiret-one-regular tracking-tighter'>
         {action === 'signin' ? 'Sign in to your account' : 'Create your Reviewit account'}
       </div>
