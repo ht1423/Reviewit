@@ -60,9 +60,14 @@ function Card() {
                 return;
             }
 
-            if ((displayType === 'text' && !content) || (displayType !== 'text' && mediaOnly)) {
+            if (displayType === 'text' && !content) {
                 toast.error("Content is required");
-                return
+                return;
+            }
+            
+            if (displayType !== 'text' && !mediaOnly && !content) {
+                toast.error("Content is required when file is selected");
+                return;
             }
 
             let mediaUrl = "";
