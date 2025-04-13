@@ -2,7 +2,11 @@
 const logout = async (req,res) => {
 
     try {
-        res.clearCookie('auth-token', { httpOnly: true })
+        res.clearCookie('auth-token', {
+            httpOnly: true,
+            sameSite: 'none',
+            secure: true,
+          })
 
         return res.json({ msg: "Logged out" })
     }
