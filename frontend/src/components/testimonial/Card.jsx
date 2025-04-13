@@ -64,9 +64,9 @@ function Card() {
                 toast.error("Content is required");
                 return;
             }
-            
+
             if (displayType !== 'text' && !mediaOnly && !content) {
-                toast.error("Content is required when file is selected");
+                toast.error("Content is required. If you don't want to write it, choose 'Media Only'");
                 return;
             }
 
