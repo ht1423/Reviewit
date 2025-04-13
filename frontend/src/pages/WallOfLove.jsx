@@ -23,12 +23,12 @@ function WallOfLove() {
 
   return (
     <div className='min-h-screen bg-black text-white flex flex-col items-center px-10 py-16'>
-      <h1 className='text-5xl sm:text-6xl font-extrabold tracking-tight text-center text-white'>
+      <h1 className='text-4xl sm:text-6xl font-extrabold tracking-tight text-center text-white whitespace-nowrap'>
         Wall of Love 💖
       </h1>
 
       {testimonials.length > 0 ? (
-        <div className='wallColumn gap-6 space-y-6 mt-24'>
+        <div className='wallColumn gap-6 space-y-6 h-20 sm:mt-24'>
           {testimonials.map(t => (
             <div
               key={t.id}
