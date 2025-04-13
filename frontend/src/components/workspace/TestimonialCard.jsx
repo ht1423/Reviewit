@@ -9,7 +9,7 @@ const TestimonialCard = ({ testimonial, handleLike }) => {
   return (
     <div className="flex flex-col items-center justify-center px-6 sm:px-8 py-10 sm:py-10 bg-zinc-900 rounded-2xl shadow-xl w-full sm:w-[500px] md:w-[550px] lg:w-[650px] xl:w-[750px] 2xl:w-[850px] my-6 space-y-8 transition-all duration-300 hover:scale-[1.01] border border-zinc-800 hover:border-white/20">
       
-      {user?.id === testimonial?.userId && <button
+      {(user && (user?.id === testimonial?.userId)) && <button
         onClick={() => handleLike(testimonial?.id)}
         className="self-end text-2xl transition-all duration-300 hover:scale-125"
       >
