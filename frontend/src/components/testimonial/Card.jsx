@@ -66,7 +66,7 @@ function Card() {
             }
 
             if (displayType !== 'text' && !mediaOnly && !content) {
-                toast.error("Content is required. If you don't want to write it, choose 'Media Only'");
+                toast.error(`Content is required. If you don't want to write it, choose '${displayType} Only'`);
                 return;
             }
 
