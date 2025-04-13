@@ -5,7 +5,7 @@ function Hero() {
   const navigate = useNavigate()
 
   return (
-      <div className="text-center max-w-4xl transform -translate-y-10 space-y-10 mb-12 sm:mb-0"> 
+      <div className="text-center max-w-4xl transform -translate-y-10 space-y-10 mb-24 sm:mb-0"> 
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
           Build your workspace with ease
         </h1>
