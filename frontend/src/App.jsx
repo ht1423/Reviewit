@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <AppRoutes/>
-      <ToastContainer
+      <ToastContainer // for notifications
         newestOnTop
         draggable
         theme="dark" 
