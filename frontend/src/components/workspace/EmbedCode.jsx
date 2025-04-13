@@ -7,7 +7,7 @@ function EmbedCode() {
   const { workspaceId } = useParams();
   const [copied, setCopied] = useState(false)
 
-  const embedCode = `<iframe src="http://localhost:5173/workspace/${workspaceId}/wall-of-love" width="100%" style="border:none; height:100vh"></iframe>`;
+  const embedCode = `<iframe src="https://my-reviewit.vercel.app/workspace/${workspaceId}/wall-of-love" width="100%" style="border:none; height:100vh"></iframe>`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(embedCode).then(() => {

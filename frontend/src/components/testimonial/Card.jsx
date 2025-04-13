@@ -75,7 +75,7 @@ function Card() {
                     return;
                 }
 
-                const signRes = await axios.get('http://localhost:3001/api/generate-signature');
+                const signRes = await axios.get('https://reviewit-backend-6yxt.onrender.com/api/generate-signature');
                 const { signature, timestamp, apiKey } = signRes.data;
 
                 const formData = new FormData();
