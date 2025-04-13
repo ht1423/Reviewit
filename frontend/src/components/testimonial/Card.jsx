@@ -60,6 +60,11 @@ function Card() {
                 return;
             }
 
+            if ((displayType === 'text' && !content) || (displayType !== 'text' && mediaOnly)) {
+                toast.error("Content is required");
+                return
+            }
+
             let mediaUrl = "";
 
             if (displayType !== 'text') {
