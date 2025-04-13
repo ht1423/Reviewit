@@ -18,7 +18,6 @@ const createTestimonial = async (req,res) => {
 
     const { name, content, type, rating, mediaUrl } = req.body
     const { workspaceId } = req.params
-    const userId = req.user.userId
 
     const workspace = await Workspace.findById(workspaceId)
 
@@ -30,7 +29,6 @@ const createTestimonial = async (req,res) => {
 
     try {
         const testimonial = await Testimonial.create({
-            userId,
             workspaceId,
             name,
             content,
@@ -40,12 +38,11 @@ const createTestimonial = async (req,res) => {
             liked: false
         })
 
-        const pushTestimonial = { $push: { testimonials: testimonial._id } }
-
-        await Promise.all([
-            User.findByIdAndUpdate(userId, pushTestimonial),
-            Workspace.findByIdAndUpdate(workspaceId, pushTestimonial)
-        ])
+        await User.findByIdAndUpdate(workspace.userId, {
+            $push: {
+                testimonials: testimonial._id
+            }
+        })
 
         return res.status(201).json({
             msg: 'Testimonial created successfully',
@@ -62,3 +59,5 @@ const createTestimonial = async (req,res) => {
 }
 
 export default createTestimonial
+
+

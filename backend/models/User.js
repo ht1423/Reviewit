@@ -24,10 +24,6 @@ const userSchema = mongoose.Schema({
     workspaces: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Workspace'
-    }],
-    testimonials: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Testimonial'
     }]
 },{
     timestamps: true
