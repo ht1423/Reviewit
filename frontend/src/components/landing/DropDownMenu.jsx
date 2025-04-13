@@ -15,7 +15,7 @@ function DropDownMenu() {
   }
 
   return (
-    <div className="absolute bg-black/90 top-4 right-2 sm:top-10 sm:right-4 p-4 rounded-lg  w-48 flex flex-col tracking-widest text-white">
+    <div className="absolute top-4 right-0 sm:top-10 sm:right-4 p-4 rounded-lg  w-48 flex flex-col tracking-widest text-white">
       <button 
         onClick={() => navigate('/dashboard')} 
         className="uppercase py-2 px-4 rounded-md text-sm font-medium text-left transition-colors duration-300 relative group cursor-pointer">
