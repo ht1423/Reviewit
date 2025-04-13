@@ -28,7 +28,7 @@ function WallOfLove() {
       </h1>
 
       {testimonials.length > 0 ? (
-        <div className='wallColumn gap-6 space-y-6 h-20 sm:mt-24'>
+        <div className='wallColumn gap-6 space-y-6 mt-20 sm:mt-24'>
           {testimonials.map(t => (
             <div
               key={t.id}
