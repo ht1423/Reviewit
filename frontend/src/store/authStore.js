@@ -52,9 +52,9 @@ const authStore = create((set,get) => ({
         const route = get().route
 
         try {
-            await axios.post(`${route}/logout`, {}, { withCredentials: true })
+            await axios.post(`${route}/logout`, { withCredentials: true })
 
-            set({ authenticated: false })
+            set({ authenticated: false, user: null })
             toast.success("Log out successfully")
             navigate('/')
         }
