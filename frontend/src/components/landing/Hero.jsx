@@ -1,11 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
+ 
 function Hero() {
   const navigate = useNavigate()
 
   return (
-    <div className="flex items-center justify-center h-screen px-4 sm:px-10 md:px-12">
+    <div className="flex items-center justify-center h-screen px-4 sm:px-10 md:px-12 mb-12 sm:mb-0">
       <div className="text-center max-w-4xl transform -translate-y-10 space-y-10"> 
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
           Build your workspace with ease
