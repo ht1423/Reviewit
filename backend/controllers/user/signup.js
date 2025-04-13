@@ -45,10 +45,8 @@ const signup = async (req,res) => {
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
 
         res.cookie('auth-token', token, {
-            httpOnly: true,
             sameSite: 'none',
             maxAge: 1000 * 60 * 60 * 24 * 7,
-            secure: true
         })
 
         const user = await User.findById(newUser._id).select('-password')

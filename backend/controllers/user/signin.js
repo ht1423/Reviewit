@@ -44,10 +44,8 @@ const signin = async (req,res) => {
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
 
         res.cookie('auth-token', token, {
-            httpOnly: true,
             sameSite: 'none',
             maxAge: 1000 * 60 * 60 * 24 * 7,
-            secure: true
         })
         
         const user = await User.findById(existingUser._id).select('-password')
@@ -55,7 +53,6 @@ const signin = async (req,res) => {
         return res.json({
             msg: 'User signed in successfully',
             user,
-            token
         })
     }
     catch (err){
