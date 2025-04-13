@@ -6,7 +6,7 @@ import TestimonialList from './TestimonialList'
 
 function DisplayTestimonial() {
 
-  const { workspace } = workspaceStore()
+  const workspace = workspaceStore(state => state.workspace)
   const [searchParams] = useSearchParams()
   const type1 = searchParams.get('type')?.toLowerCase() || 'all'
   const { likeUpdate } = testimonialStore()

@@ -1,6 +1,5 @@
 import Testimonial from "../../models/Testimonial.js"
 import zodTestimonial from "../../zod/testimonial.js"
-import User from '../../models/User.js'
 import Workspace from '../../models/Workspace.js'
 
 const createTestimonial = async (req,res) => {
@@ -38,7 +37,7 @@ const createTestimonial = async (req,res) => {
             liked: false
         })
 
-        await User.findByIdAndUpdate(workspace.userId, {
+        await Workspace.findByIdAndUpdate(workspaceId, {
             $push: {
                 testimonials: testimonial._id
             }
