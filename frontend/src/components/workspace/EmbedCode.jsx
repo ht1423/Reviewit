@@ -31,7 +31,7 @@ function EmbedCode() {
       <textarea
         value={embedCode}
         readOnly
-        className="w-full h-36 lg:h-28 p-4 tracking-wider bg-zinc-800 border border-zinc-700 rounded-md text-white/70 text-sm sm:text-base"
+        className="w-full h-44 sm:h-36 lg:h-28 p-4 tracking-wider bg-zinc-800 border border-zinc-700 rounded-md text-white/70 text-sm sm:text-base"
       />
     </div>
   );
