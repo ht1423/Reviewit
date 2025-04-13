@@ -7,7 +7,9 @@ function Landing() {
   return (
     <div className='h-screen w-full bg-black/90 overflow-hidden'>
         <Navbar showButton={true}/>
-        <Hero/>
+        <div className="flex items-center justify-center h-screen px-4 sm:px-10 md:px-12">
+          <Hero/>
+        </div>
     </div>
   )
 }
