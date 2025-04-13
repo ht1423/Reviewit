@@ -28,12 +28,6 @@ const createTestimonial = async (req,res) => {
         })
     }
 
-    if(userId === workspace.userId.toString()){
-        return res.status(403).json({    
-            msg: "You cannot create a testimonial for your own workspace"
-        })
-    }
-
     try {
         const testimonial = await Testimonial.create({
             userId,
