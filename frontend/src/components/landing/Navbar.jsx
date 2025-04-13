@@ -58,7 +58,7 @@ function Navbar({showButton}) {
           <div 
           ref={ref} 
           onClick={() => setVisible(prev => !prev)} 
-          className={`border-2 border-white rounded-full flex items-center justify-center text-[22px] font-medium relative h-12 w-12 cursor-pointer transition-all duration-300 hover:bg-white ${visible ? 'bg-white text-black' : ' text-white'} hover:text-black hover:border-transparent active:scale-95 pb-1`}>
+          className={`border-2 border-white rounded-full flex items-center justify-center text-[16px] sm:text-[22px] font-medium relative h-8 w-8 sm:h-12 sm:w-12 cursor-pointer transition-all duration-300 hover:bg-white ${visible ? 'bg-white text-black' : ' text-white'} hover:text-black hover:border-transparent active:scale-95`}>
           <div className="flex items-center justify-center w-full h-full">{user?.name[0]?.toUpperCase()}</div>
           {visible && <DropDownMenu />}
         </div>
