@@ -12,9 +12,6 @@ const likeUpdate = async (req,res) => {
             return res.status(404).json({msg: "Testimonial not found"})
         }
 
-        if(testimonial.userId.toString() !== userId){
-            return res.status(403).json({msg: "Only the creator can update the like"})
-        }
 
         testimonial.liked = !testimonial.liked
 
