@@ -3,7 +3,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 
 const workspaceStore = create((set, get) => ({
-    route: 'https://reviewit-backend-6yxt.onrender.com/api/workspace',
+    route: 'http://localhost:3001/api/workspace',
     workspace: null,
 
     create: async({ name, navigate }) => {
