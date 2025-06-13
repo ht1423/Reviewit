@@ -6,7 +6,7 @@ const zodTestimonial = z.object({
     content: z.string().max(500, "Content can be at most 500 characters long").optional(),
     rating: z.number().min(0).max(5).optional(),
     mediaUrl: z.string().optional()
-}).strict().superRefine((data,ctx) => {
+}).superRefine((data,ctx) => {
     if(data.type === 'text' && !data.content?.length){
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
