@@ -29,7 +29,7 @@ const testimonialStore = create((set, get) => ({
     }
 
     catch (err) {
-      handleTestimonialError(err)
+      
     }
   }
   
