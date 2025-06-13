@@ -18,7 +18,7 @@ function Workspace() {
   }, [workspaceId, navigate]);
 
   return (
-    <div className="bg-black/90 min-h-screen text-white">
+    <div className="bg-black min-h-screen text-white">
       <Navbar showButton={true} />
       <div className="px-4 md:px-10 lg:px-24 xl:px-40 mt-12">
         <Skeleton />

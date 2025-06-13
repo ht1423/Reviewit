@@ -30,7 +30,7 @@ function EmbedCode() {
   };
 
   return (
-    <div className="bg-black/5 mx-6 p-5 rounded-lg border border-zinc-800 text-white/80">
+    <div className="bg-zinc-900/5 mx-6 p-5 rounded-lg border border-zinc-800 text-white/80">
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <p className="font-semibold text-lg sm:text-xl">Embed this code in your website:</p>

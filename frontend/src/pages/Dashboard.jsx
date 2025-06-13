@@ -10,12 +10,12 @@ function Dashboard() {
 
   if (!authenticated) {
     return (
-      <div className="bg-black/90 h-screen overflow-hidden text-white">
+      <div className="bg-black h-screen overflow-hidden text-white">
         <Navbar />
         <div className="flex items-center justify-center h-screen px-10">
-          <div className="w-full max-w-xl text-black py-10 px-6 sm:px-10 text-center bg-zinc-900 rounded-2xl shadow-xl border border-zinc-800 -mt-28">
-            <h2 className="text-2xl sm:text-4xl text-white font-semibold mb-10 sm:mb-16">You're not logged in</h2>
-            <p className="text-base sm:text-lg text-gray-400">
+          <div className="w-full max-w-xl text-black py-10 px-6 sm:px-10 text-center bg-white/5 rounded-2xl shadow-xl border border-zinc-800 -mt-28">
+            <h2 className="text-2xl sm:text-4xl text-red-500 font-semibold mb-10 sm:mb-16">You're not logged in</h2>
+            <p className="text-base sm:text-lg text-gray-300">
               To access your personalized dashboard, please sign in with your account credentials.
             </p>
             <button 
@@ -30,7 +30,7 @@ function Dashboard() {
   }
 
   return (
-    <div className="bg-black/90 min-h-screen text-white">
+    <div className="bg-black min-h-screen text-white">
       <Navbar showButton={true} />
       <div className="px-4 md:px-10 lg:px-24 xl:px-40 pb-10">
         <Skeleton />

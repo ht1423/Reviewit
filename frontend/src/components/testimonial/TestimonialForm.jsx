@@ -12,7 +12,7 @@ const TestimonialForm = ({ setName, setContent, displayType, mediaOnly }) => {
                 <label className="text-base text-white/80 font-medium ">Content</label>
                 <textarea
                     onChange={(e) => setContent(e.target.value)}
-                    className="w-full p-3 mt-4 rounded-md bg-[#2a2a2a] text-white focus:outline-none focus:ring-2 focus:ring-gray-500 transition"
+                    className="w-full p-3 mt-4 rounded-md bg-white/5 text-white focus:outline-none focus:ring-2 focus:ring-gray-500 transition"
                     rows={4}
                     placeholder="Write something nice..."
                 />

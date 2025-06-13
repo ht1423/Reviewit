@@ -3,6 +3,7 @@ import Navbar from '../components/landing/Navbar'
 import Hero from '../components/landing/Hero'
 
 function Landing() {
+
   return (
     <div className='min-h-screen w-full bg-black'>
         <Navbar showButton={true}/>

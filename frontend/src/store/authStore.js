@@ -3,7 +3,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify' 
 
 const authStore = create((set,get) => ({
-    route: 'http://localhost:3001/api/user',
+    route: 'https://reviewit-backend-6yxt.onrender.com/api/user',
     authenticated: false,
     user: null,
 

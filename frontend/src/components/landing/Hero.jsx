@@ -5,7 +5,7 @@ function Hero() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen flex items-center justify-center mt-54 relative  bg-black pb-16">
+    <div className="min-h-screen flex items-center justify-center mt-48 relative  bg-black pb-16">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>

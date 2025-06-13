@@ -40,9 +40,8 @@ function Navbar({showButton}) {
           Reviewit
         </button>
 
-        <div className='flex items-center space-x-6'>
-          <Link to='/' className='text-white hover:text-blue-400 transition-all duration-300 font-medium text-sm sm:text-base'>Home</Link>
-          <Link to='/add-review' className='text-white hover:text-blue-400 transition-all duration-300 font-medium text-sm sm:text-base'>Add Review</Link>
+        <div className='flex items-center space-x-6 md:space-x-10'>
+          
           {showButton && (
             authenticated === false
               ? <button 
@@ -54,7 +53,7 @@ function Navbar({showButton}) {
                   wordSpacing: '4px',
                   letterSpacing: '3px'
                 }}>
-                Login
+                Get STarted
               </button>
               : 
               <div 

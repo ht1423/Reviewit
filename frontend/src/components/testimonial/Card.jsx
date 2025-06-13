@@ -121,7 +121,7 @@ function Card() {
     };
 
     return (
-        <div className="flex flex-col p-6 sm:p-10 rounded-2xl w-full max-w-md lg:max-w-[480px] bg-[#1a1a1a] shadow-xl text-white space-y-8">
+        <div className="flex flex-col p-6 sm:p-10 rounded-2xl w-full max-w-md lg:max-w-[480px] bg-[#121212] shadow-xl text-white space-y-8">
 
             <DisplayTypeButtons handleClick={handleClick} activeType={displayType}/>
    

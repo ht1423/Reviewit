@@ -3,7 +3,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 
 const testimonialStore = create((set, get) => ({
-  route: 'http://localhost:3001/api/testimonial',
+  route: 'https://reviewit-backend-6yxt.onrender.com/api/testimonial',
   
   createTestimonial: async ({ data, workspaceId, navigate }) => {
     const route = get().route

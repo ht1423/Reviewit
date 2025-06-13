@@ -5,9 +5,9 @@ import Card from '../components/testimonial/Card'
 function Testimonial() {
 
   return (
-    <div className='bg-[#0f0f0f] min-h-screen w-full '>
+    <div className='bg-black min-h-screen w-full '>
       <Navbar showButton={true}/>
-      <div className='flex justify-center items-center flex-1 w-full px-6 py-10'>
+      <div className='flex justify-center items-center flex-1 w-full px-6 pt-10 pb-16'>
         <Card/>
       </div>
     </div>

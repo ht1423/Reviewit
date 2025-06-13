@@ -11,8 +11,8 @@ function Skeleton() {
   const navigate = useNavigate()
 
   return (
-    <div className="">
-      <Heading text={user?.name}/>
+    <div className=''>
+      <Heading text= {user?.name}/>
       <div className='flex justify-center'>
         <TestimonialButton text='+ Create Workspace' nav={() => navigate('/create')}/>
       </div>

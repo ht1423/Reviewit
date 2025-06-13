@@ -4,7 +4,7 @@ import Card from '../components/createWorkspace/Card';
 
 function CreateWorkspace() {
   return (
-    <div className="bg-black/90 h-screen flex flex-col overflow-hidden">
+    <div className="bg-black h-screen flex flex-col overflow-hidden">
       <Navbar showButton={true} />
       <div className="flex justify-center items-center h-screen ">
         <Card />
