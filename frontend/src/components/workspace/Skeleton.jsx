@@ -14,7 +14,7 @@ function Skeleton() {
   const workspace = workspaceStore((state) => state.workspace);
 
   return (
-    <div className="my-16">
+    <div className="">
         <Heading text={workspace?.name}/>
         <EmbedCode />
       <div className='flex flex-col md:flex-row justify-center items-center mt-12 sm:mt-20 gap-10 md:gap-16'>
