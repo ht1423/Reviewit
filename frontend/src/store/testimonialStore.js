@@ -25,7 +25,7 @@ const testimonialStore = create((set, get) => ({
     const route = get().route
 
     try {
-      await axios.put(`${route}/like/${testimonialId}`, { withCredentials: true })
+      await axios.put(`${route}/like/${testimonialId}`,{}, { withCredentials: true })
     }
 
     catch (err) {
