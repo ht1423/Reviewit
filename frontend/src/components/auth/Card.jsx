@@ -25,12 +25,12 @@ function Card({ action }) {
   const toggleAction = action === 'signin' ? () => navigate('/auth?action=signup') : () => navigate('/auth?action=signin')
 
   return (
-    <div className='flex flex-col p-10 rounded-xl  w-full max-w-md lg:max-w-[480px] mb-14 sm:mb-28'>
-      <div className='text-[24px] sm:text-[30px] lg:text-[32px] whitespace-nowrap text-white mb-10 sm:mb-16 text-center font-medium poiret-one-regular tracking-tighter'>
+    <div className='flex flex-col p-10 rounded-2xl w-full max-w-md lg:max-w-[480px]  backdrop-blur-sm shadow-2xl mb-14'>
+      <div className='text-[26px] sm:text-[30px] lg:text-[32px] whitespace-nowrap text-white mb-8 sm:mb-12 text-center font-semibold tracking-tighter bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent'>
         {action === 'signin' ? 'Sign in to your account' : 'Create your Reviewit account'}
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {action === 'signup' && <Input text='Name' onChange={handleInputChange(setName)}/>}
         <Input text='Email' onChange={handleInputChange(setEmail)}/>
         <Input text='Password' onChange={handleInputChange(setPassword)}/>
@@ -38,11 +38,10 @@ function Card({ action }) {
 
       <button 
         onClick={handleSubmit} 
-        className='bg-indigo-800 text-white mt-8 hover:opacity-70 font-semibold p-3 px-8 rounded-lg transition-all duration-300 cursor-pointer text-xl'>
+        className='bg-gradient-to-r from-indigo-600 to-indigo-800 text-white mt-7 hover:from-indigo-500 hover:to-indigo-700 hover:shadow-[0_0_20px_rgba(99,102,241,0.6)] font-semibold p-2.5 px-8 rounded-xl transition-all duration-300 cursor-pointer text-lg transform hover:scale-[1.02] active:scale-[0.98]'>
         {action === 'signin' ? 'Sign in' : 'Create account'}
-
       </button>
-      <div className='text-center text-white/80 mt-6'>
+      <div className='text-center text-white/70 mt-6 text-sm sm:text-base'>
         {action === 'signin' ? 'Don\'t have an account? ' : 'Already have an account? '}
         <span onClick={toggleAction} className='text-zinc-400 hover:underline cursor-pointer'>
           {action === 'signin' ? 'Sign up' : 'Sign in'}

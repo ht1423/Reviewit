@@ -9,7 +9,7 @@ function Input({ text, onChange }) {
       <input
         type={inputType}
         onChange={onChange}
-        className='p-3 rounded-md w-full h-11 bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent shadow-sm'
+        className='p-3 rounded-md w-full h-10 bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent shadow-sm'
         
       />
     </div>

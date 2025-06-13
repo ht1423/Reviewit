@@ -8,7 +8,7 @@ function Auth() {
     const action = searchParams.get('action')
 
   return (
-    <div className='h-screen w-full bg-black/90 overflow-hidden'>
+    <div className='h-screen w-full bg-black overflow-hidden'>
       <Navbar/>
       <div className='flex justify-center items-center h-screen w-full'>
         <Card action={action}/>     

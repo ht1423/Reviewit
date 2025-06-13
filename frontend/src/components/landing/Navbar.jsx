@@ -31,40 +31,41 @@ function Navbar({showButton}) {
     },[visible])
 
   return (
-    <div className='flex justify-between items-center px-4 sm:px-10 md:px-12 lg:px-24 xl:px-40 py-4'>
-
+    <div className='flex justify-between items-center px-4 sm:px-10 md:px-12 lg:px-24 xl:px-40 py-4 bg-black/80 backdrop-blur-sm shadow-lg'>
         <button
           onClick={() => navigate('/')}
-          className='cursor-pointer text-xl xs:text-2xl sm:text-3xl md:text-4xl text-white font-extrabold major-mono-display-regular '
+          className='cursor-pointer text-xl xs:text-2xl sm:text-3xl md:text-4xl font-extrabold major-mono-display-regular bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text hover:from-blue-500 hover:to-purple-600 transition-all duration-300'
+          style={{ textShadow: '0 0 10px rgba(59, 130, 246, 0.5)' }}
         >
           Reviewit
         </button>
 
-        {showButton && (
-        authenticated === false
-        
-          ? <button 
-          onClick={() => {
-            navigate('/auth?action=signin')
-          }} 
-          className="border-2 border-white text-white text-sm sm:text-[17px] font-semibold py-3 px-4 sm:py-3 sm:px-8 uppercase cursor-pointer transition-all duration-300 bg-transparent hover:bg-white hover:text-black hover:border-transparent shadow-md" style={{
-            wordSpacing: '4px',
-            letterSpacing: '3px'
-          }}>
-          Get Started
-        </button>
-        
-          : 
-          <div 
-          ref={ref} 
-          onClick={() => setVisible(prev => !prev)} 
-          className={`border-2 border-white rounded-full flex items-center justify-center text-[16px] sm:text-[22px] font-medium relative h-8 w-8 sm:h-12 sm:w-12 cursor-pointer transition-all duration-300 hover:bg-white ${visible ? 'bg-white text-black' : ' text-white'} hover:text-black hover:border-transparent active:scale-95`}>
-          <div className="flex items-center justify-center w-full h-full">{user?.name[0]?.toUpperCase()}</div>
-          {visible && <DropDownMenu />}
+        <div className='flex items-center space-x-6'>
+          <Link to='/' className='text-white hover:text-blue-400 transition-all duration-300 font-medium text-sm sm:text-base'>Home</Link>
+          <Link to='/add-review' className='text-white hover:text-blue-400 transition-all duration-300 font-medium text-sm sm:text-base'>Add Review</Link>
+          {showButton && (
+            authenticated === false
+              ? <button 
+                onClick={() => {
+                  navigate('/auth?action=signin')
+                }} 
+                className="border-2 border-blue-400 text-white text-sm sm:text-[17px] font-semibold py-2 px-4 sm:py-2 sm:px-6 uppercase cursor-pointer transition-all duration-300 bg-transparent hover:bg-blue-400 hover:text-black hover:border-transparent shadow-md hover:shadow-lg hover:shadow-blue-400/50"
+                style={{
+                  wordSpacing: '4px',
+                  letterSpacing: '3px'
+                }}>
+                Login
+              </button>
+              : 
+              <div 
+                ref={ref} 
+                onClick={() => setVisible(prev => !prev)} 
+                className={`border-2 border-blue-400 rounded-full flex items-center justify-center text-[16px] sm:text-[22px] font-medium relative h-8 w-8 sm:h-12 sm:w-12 cursor-pointer transition-all duration-300 hover:bg-blue-400 ${visible ? 'bg-blue-400 text-black shadow-lg shadow-blue-400/50' : ' text-white'} hover:text-black hover:border-transparent active:scale-95`}>
+                <div className="flex items-center justify-center w-full h-full">{user?.name[0]?.toUpperCase()}</div>
+                {visible && <DropDownMenu />}
+              </div>
+          )}
         </div>
-
-
-        )}
     </div>
   )
 }
