@@ -9,11 +9,13 @@ import FileUpload from './FileUpload';
 import TestimonialForm from './TestimonialForm';
 import DisplayTypeButtons from './DisplayTypeButtons';
 import StarRating from './StarRating';
+import authStore from '../../store/authStore';
 
 function Card() {
     const [searchParams, setSearchParams] = useSearchParams();
     const workspace = workspaceStore(state => state.workspace);
     const get = workspaceStore(state => state.get);
+    const user = authStore(state => state.user)
     const { workspaceId } = useParams();
     const displayType = searchParams.get('type');
     const [rating, setRating] = useState(0);
@@ -23,6 +25,7 @@ function Card() {
     const [file, setFile] = useState('');
     const createTestimonial = testimonialStore(state => state.createTestimonial);
     const navigate = useNavigate();
+    const userId = user.id
 
     useEffect(() => {
         const fetchWorkspace = async () => {
@@ -107,6 +110,7 @@ function Card() {
             const data = {
                 name,
                 content,
+                userId,
                 rating,
                 type: displayType,
                 mediaUrl
@@ -121,7 +125,7 @@ function Card() {
     };
 
     return (
-        <div className="flex flex-col p-6 sm:p-10 rounded-2xl w-full max-w-md lg:max-w-[480px] bg-[#121212] shadow-xl text-white space-y-8">
+        <div className="flex flex-col p-6 sm:p-10 rounded-2xl w-full max-w-md lg:max-w-[480px] bg-[#1a1a1a] shadow-xl text-white space-y-8">
 
             <DisplayTypeButtons handleClick={handleClick} activeType={displayType}/>
    

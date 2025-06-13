@@ -15,7 +15,7 @@ const createTestimonial = async (req,res) => {
             })
         }
 
-    const { name, content, type, rating, mediaUrl } = req.body
+    const { name, userId, content, type, rating, mediaUrl } = req.body
     const { workspaceId } = req.params
 
     const workspace = await Workspace.findById(workspaceId)
@@ -29,6 +29,7 @@ const createTestimonial = async (req,res) => {
     try {
         const testimonial = await Testimonial.create({
             workspaceId,
+            userId,
             name,
             content,
             rating,
