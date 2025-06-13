@@ -7,7 +7,7 @@ function Heading({text}) {
     : 'Untitled';
 
   return (
-    <div className='flex items-center justify-center mt-20 mb-24 '>
+    <div className='flex items-center justify-center mt-14 mb-16 sm:mt-20 sm:mb-24 '>
       <div className="text-3xl sm:text-5xl p-2 font-semibold  text-white truncate max-w-[7em] sm:max-w-[9em] md:max-w-[11em] lg:max-w-[13em] xl:max-w-[18em]">
       Hi, {displayText}
     </div>
