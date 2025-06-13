@@ -6,6 +6,11 @@ const testimonialSchema = new mongoose.Schema({
         ref: 'Workspace',
         required: true
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     name: {
         type: String,
         trim: true,
