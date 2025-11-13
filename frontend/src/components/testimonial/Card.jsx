@@ -25,7 +25,7 @@ function Card() {
     const [file, setFile] = useState('');
     const createTestimonial = testimonialStore(state => state.createTestimonial);
     const navigate = useNavigate();
-    const userId = user.id
+    const userId = user?.id
 
     useEffect(() => {
         const fetchWorkspace = async () => {
